@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\AnswerRecapExport;
 use Illuminate\Support\Collection;
+use App\Models\School;
+use App\Models\Kelas;
+use phpDocumentor\Reflection\PseudoTypes\True_;
 
 class AdminController extends Controller
 {
@@ -43,5 +46,15 @@ class AdminController extends Controller
 
     public function export(){
         return Excel::download(new AnswerRecapExport, 'recap.xlsx');
+    }
+
+    public function createSchool(){
+        $modelSchool = School::all();
+        $data = False;
+        if (count($modelSchool)>0) {
+            # code...
+              $data = True;
+        }
+        return view('admin.schools',['data'=>$data,'model'=>$modelSchool]);
     }
 }
