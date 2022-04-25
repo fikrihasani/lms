@@ -30,30 +30,30 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Jawaban A</label>
-                            <input type="text" name="{{'answerA'.$i}}" class="form-control" id="">
+                            <textarea type="text" name="{{'answerA'.$i}}" cols="50" rows="2" class="ckeditor form-control" id="">Jawaban A</textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Jawaban B</label>
-                            <input type="text" name="{{'answerB'.$i}}" class="form-control" id="">
+                            <textarea type="text" name="{{'answerB'.$i}}" cols="50" rows="2" class="ckeditor form-control" id="">Jawaban B</textarea>
                         </div>                
                         <div class="mb-3">
                             <label class="form-label">Jawaban C</label>
-                            <input type="text" name="{{'answerC'.$i}}" class="form-control" id="">
+                            <textarea type="text" name="{{'answerC'.$i}}" cols="50" rows="2" class="ckeditor form-control" id="">Jawaban C</textarea>
                         </div>
                     </div>
                     <div class="row">
                         <p>Alasan: </p>
                         <div class="mb-3">
                             <label class="form-label">A: </label>
-                            <input type="text" name="{{'answerReasonA'.$i}}" class="form-control" id="">
+                            <textarea type="text" name="{{'answerReasonA'.$i}}" class="ckeditor form-control" id="">Alasan jawaban A </textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">B: </label>
-                            <input type="text" name="{{'answerReasonB'.$i}}" class="form-control" id="">
+                            <textarea type="text" name="{{'answerReasonB'.$i}}" class="ckeditor form-control" id="">Alasan jawaban B </textarea>
                         </div>                
                         <div class="mb-3">
                             <label class="form-label">C: </label>
-                            <input type="text" name="{{'answerReasonC'.$i}}" class="form-control" id="">
+                            <textarea type="text" name="{{'answerReasonC'.$i}}" class="ckeditor form-control" id="">Alasan jawaban C </textarea>
                         </div>
                     </div>
                     <div class="mb-3">
@@ -78,40 +78,20 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Feedback Jawaban Salah</label>
-                        <textarea name="{{'feedbackincorAns'.$i}}" cols="50" rows="2" class="form-control"></textarea>
+                        <textarea name="{{'feedbackincorAns'.$i}}" cols="50" rows="2" class="ckeditor form-control"></textarea>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Feedback Alasan Benar</label>
-                        <textarea name="{{'feedbackcorReason'.$i}}" cols="50" rows="2" class="form-control"></textarea>
+                        <textarea name="{{'feedbackcorReason'.$i}}" cols="50" rows="2" class="ckeditor form-control"></textarea>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Feedback Alasan Salah</label>
-                        <textarea name="{{'feedbackincorReason'.$i}}" cols="50" rows="2" class="form-control"></textarea>
+                        <textarea name="{{'feedbackincorReason'.$i}}" cols="50" rows="2" class="ckeditor form-control"></textarea>
                     </div>
                 </div>
                 <hr>
                 @endfor
                 <button type="submit" form="Form1" value="Submit" class="btn btn-primary">Submit</button>
-                {{-- <input type="button" value="submit" class="btn btn-primary"> --}}
             </form>
-            {{-- <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item">
-                      <a class="page-link" href="#">Previous</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav> --}}
         </div>
 @endsection

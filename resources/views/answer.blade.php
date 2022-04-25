@@ -36,19 +36,19 @@
                     <div class="form-check">
                       <input class="form-check-input" type="radio" name="{{'ansProb'.$i}}" value="1">
                       <label class="form-check-label">
-                      {{$q->answerA}}
+                      {!! $q->answerA !!}
                       </label>
                     </div>
                     <div class="form-check">
                       <input class="form-check-input" type="radio" name="{{'ansProb'.$i}}" value="2">
                       <label class="form-check-label">
-                      {{$q->answerB}}
+                      {!! $q->answerB !!}
                       </label>
                     </div>
                     <div class="form-check">
                       <input class="form-check-input" type="radio" name="{{'ansProb'.$i}}" value="3">
                       <label class="form-check-label">
-                      {{$q->answerC}}
+                      {!! $q->answerC !!}
                       </label>
                     </div>
                     <hr>
@@ -56,19 +56,19 @@
                     <div class="form-check">
                       <input class="form-check-input" type="radio" name="{{"ansReason".$i}}" value="1">
                       <label class="form-check-label">
-                      {{$q->answerReasonA}}
+                      {!! $q->answerReasonA !!}
                       </label>
                     </div>
                     <div class="form-check">
                       <input class="form-check-input" type="radio" name="{{"ansReason".$i}}" value="2">
                       <label class="form-check-label">
-                      {{$q->answerReasonB}}
+                      {!! $q->answerReasonB !!}
                       </label>
                     </div>
                     <div class="form-check">
                       <input class="form-check-input" type="radio" name="{{"ansReason".$i}}" value="3">
                       <label class="form-check-label">
-                      {{$q->answerReasonC}}
+                      {!! $q->answerReasonC !!}
                       </label>
                     </div>
                     <hr>
