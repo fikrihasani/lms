@@ -32,7 +32,7 @@
               <input type="hidden" name="{{'questions_id'.$i}}" value="{{$q->id}}">
                 <div>
                     <p><b>Soal no: {{ $i }}</b></p>
-                    <p>{{$q->narration}}</p>
+                    <p>{!! $q->narration !!}</p>
                     <div class="form-check">
                       <input class="form-check-input" type="radio" name="{{'ansProb'.$i}}" value="1">
                       <label class="form-check-label">

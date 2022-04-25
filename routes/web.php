@@ -27,5 +27,5 @@ Route::get('/answer/result/{id}',[AppController::class,'result']);
 Route::post('/answerStore',[AppController::class,'answerStore']);
 Route::get('/admin',[AdminController::class,'index']);
 Route::get("/admin/recap",[AdminController::class,'recapAns']);
-Route::resource('question', QuestionController::class);
+Route::resource('/admin/question', QuestionController::class);
 Route::get('/admin/export/', [AdminController::class, 'export']);

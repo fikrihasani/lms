@@ -26,7 +26,7 @@
                     <div class="row">
                         <div class="mb-3">
                             <label class="form-label">Narasi Pertanyaan</label>
-                            <textarea name="{{'narration'.$i}}" cols="50" rows="5" class="form-control"></textarea>
+                            <textarea name="{{'narration'.$i}}" cols="50" rows="5" class="ckeditor form-control"></textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Jawaban A</label>
@@ -74,7 +74,7 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Feedback Jawaban Benar</label>
-                        <textarea name="{{'feedbackcorAns'.$i}}" cols="50" rows="2" class="form-control"></textarea>
+                        <textarea name="{{'feedbackcorAns'.$i}}" cols="50" rows="2" class="ckeditor form-control"></textarea>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Feedback Jawaban Salah</label>
