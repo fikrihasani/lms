@@ -26,34 +26,34 @@
                     <div class="row">
                         <div class="mb-3">
                             <label class="form-label">Narasi Pertanyaan</label>
-                            <textarea name="{{'narration'.$i}}" cols="50" rows="5" class="ckeditor form-control"></textarea>
+                            <textarea name="{{'narration'.$i}}" cols="50" rows="5" class="wysiwyg-editor form-control" id={{"question-editor-".$i}}></textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Jawaban A</label>
-                            <textarea type="text" name="{{'answerA'.$i}}" cols="50" rows="2" class="ckeditor form-control" id="">Jawaban A</textarea>
+                            <textarea type="text" name="{{'answerA'.$i}}" cols="50" rows="2" class="wysiwyg-editor form-control" id={{"answerA-editor-".$i}}>Jawaban A</textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Jawaban B</label>
-                            <textarea type="text" name="{{'answerB'.$i}}" cols="50" rows="2" class="ckeditor form-control" id="">Jawaban B</textarea>
+                            <textarea type="text" name="{{'answerB'.$i}}" cols="50" rows="2" class="wysiwyg-editor form-control" id={{"answerB-editor-".$i}}>Jawaban B</textarea>
                         </div>                
                         <div class="mb-3">
                             <label class="form-label">Jawaban C</label>
-                            <textarea type="text" name="{{'answerC'.$i}}" cols="50" rows="2" class="ckeditor form-control" id="">Jawaban C</textarea>
+                            <textarea type="text" name="{{'answerC'.$i}}" cols="50" rows="2" class="wysiwyg-editor form-control" id={{"answerC-editor-".$i}}>Jawaban C</textarea>
                         </div>
                     </div>
                     <div class="row">
                         <p>Alasan: </p>
                         <div class="mb-3">
                             <label class="form-label">A: </label>
-                            <textarea type="text" name="{{'answerReasonA'.$i}}" class="ckeditor form-control" id="">Alasan jawaban A </textarea>
+                            <textarea type="text" name="{{'answerReasonA'.$i}}" class="wysiwyg-editor form-control" id={{"reasonA-editor-".$i}}>Alasan jawaban A </textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">B: </label>
-                            <textarea type="text" name="{{'answerReasonB'.$i}}" class="ckeditor form-control" id="">Alasan jawaban B </textarea>
+                            <textarea type="text" name="{{'answerReasonB'.$i}}" class="wysiwyg-editor form-control" id={{"reasonB-editor-".$i}}>Alasan jawaban B </textarea>
                         </div>                
                         <div class="mb-3">
                             <label class="form-label">C: </label>
-                            <textarea type="text" name="{{'answerReasonC'.$i}}" class="ckeditor form-control" id="">Alasan jawaban C </textarea>
+                            <textarea type="text" name="{{'answerReasonC'.$i}}" class="wysiwyg-editor form-control" id={{"reasonC-editor-".$i}}>Alasan jawaban C </textarea>
                         </div>
                     </div>
                     <div class="mb-3">
@@ -74,19 +74,19 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Feedback Jawaban Benar</label>
-                        <textarea name="{{'feedbackcorAns'.$i}}" cols="50" rows="2" class="ckeditor form-control"></textarea>
+                        <textarea name="{{'feedbackcorAns'.$i}}" cols="50" rows="2" class="wysiwyg-editor form-control" id={{"feedbackCor-editor-".$i}}></textarea>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Feedback Jawaban Salah</label>
-                        <textarea name="{{'feedbackincorAns'.$i}}" cols="50" rows="2" class="ckeditor form-control"></textarea>
+                        <textarea name="{{'feedbackincorAns'.$i}}" cols="50" rows="2" class="wysiwyg-editor form-control" id={{"feedbackIncor-editor-".$i}}></textarea>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Feedback Alasan Benar</label>
-                        <textarea name="{{'feedbackcorReason'.$i}}" cols="50" rows="2" class="ckeditor form-control"></textarea>
+                        <textarea name="{{'feedbackcorReason'.$i}}" cols="50" rows="2" class="wysiwyg-editor form-control" id={{"feedbackResCor-editor-".$i}}></textarea>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Feedback Alasan Salah</label>
-                        <textarea name="{{'feedbackincorReason'.$i}}" cols="50" rows="2" class="ckeditor form-control"></textarea>
+                        <textarea name="{{'feedbackincorReason'.$i}}" cols="50" rows="2" class="wysiwyg-editor form-control" id={{"feedbackResIncor-editor-".$i}}></textarea>
                     </div>
                 </div>
                 <hr>

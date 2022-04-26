@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CkeditorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,3 +33,4 @@ Route::prefix('/admin')->group(function(){
     Route::resource('/question', QuestionController::class);
     Route::get('/export', [AdminController::class, 'export']);
 });
+Route::post('/ckeditor/upload',[CkeditorController::class,'upload'])->name('ckeditor.image-upload');

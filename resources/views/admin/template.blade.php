@@ -26,9 +26,64 @@
         @yield('adminsection')
     </body>
     <script src="//cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
+
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('.ckeditor').ckeditor();
-        });
+        window.onload = function () {
+            for (let index = 1; index <= 2; index++) {
+                CKEDITOR.replace('question-editor-'+index,{
+                    filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+                    filebrowserUploadMethod: 'form'
+                });
+                CKEDITOR.replace('answerA-editor-'+index,{
+                    filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+                    filebrowserUploadMethod: 'form'
+                });
+                CKEDITOR.replace('answerB-editor-'+index,{
+                    filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+                    filebrowserUploadMethod: 'form'
+                });
+                CKEDITOR.replace('answerC-editor-'+index,{
+                    filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+                    filebrowserUploadMethod: 'form'
+                });
+                CKEDITOR.replace('reasonA-editor-'+index,{
+                    filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+                    filebrowserUploadMethod: 'form'
+                });
+                CKEDITOR.replace('reasonB-editor-'+index,{
+                    filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+                    filebrowserUploadMethod: 'form'
+                });
+                CKEDITOR.replace('reasonC-editor-'+index,{
+                    filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+                    filebrowserUploadMethod: 'form'
+                });
+                CKEDITOR.replace('feedbackCor-editor-'+index,{
+                    filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+                    filebrowserUploadMethod: 'form'
+                });
+                CKEDITOR.replace('feedbackIncor-editor-'+index,{
+                    filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+                    filebrowserUploadMethod: 'form'
+                });
+                CKEDITOR.replace('feedbackResCor-editor-'+index,{
+                    filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+                    filebrowserUploadMethod: 'form'
+                });
+                CKEDITOR.replace('feedbackResIncor-editor-'+index,{
+                    filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+                    filebrowserUploadMethod: 'form'
+                });
+            }
+            // CKEDITOR.replace('wysiwyg-editor',{
+            //     filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+            //     filebrowserUploadMethod: 'form'
+            // });
+            // CKEDITOR.replaceAll('.ckeditor', {
+            //     filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+            //     filebrowserUploadMethod: 'form'
+            // });
+        }
+
     </script>
 </html>
