@@ -83,6 +83,18 @@
             //     filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
             //     filebrowserUploadMethod: 'form'
             // });
+            var totalNumberOfproblems = 2;
+                for(var i=2; i<=totalNumberOfproblems; i++){
+
+                    if (document.getElementById('problem'+i)) {
+
+                        document.getElementById('problem'+i).style.display='none';
+                    }
+
+                }
+                if (document.getElementById('problem'+id)) {
+                    document.getElementById('problem'+id).style.display='block';
+                }
         }
 
     </script>

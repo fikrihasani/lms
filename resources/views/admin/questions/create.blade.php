@@ -21,7 +21,7 @@
                 @csrf
                 <input type="hidden" name="questionType" value="A">
                 @for ($i = 1; $i < 3; $i++)
-                <div id="{{$i}}">
+                <div id="{{'problem'.$i}}">
                     <p><b>Pertanyaan {{$i}}</b></p>
                     <div class="row">
                         <div class="mb-3">
