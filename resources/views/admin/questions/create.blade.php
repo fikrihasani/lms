@@ -1,26 +1,18 @@
 
 @extends('admin.template')
 @section('adminsection')
-    {{-- <div class="relative flex items-top justify-center min-h-screen bg-gray-100 dark:bg-gray-900 sm:items-center py-4 sm:pt-0">
-        @if (Route::has('login'))
-            <div class="hidden fixed top-0 right-0 px-6 py-4 sm:block">
-                @auth
-                    <a href="{{ url('/home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
-                @else
-                    <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Log in</a>
-
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
-                    @endif
-                @endauth
-            </div>
-        @endif --}}
+    @if (session('success'))
+        <div class="alert alert-success" role="alert">
+          <h4 class="alert-heading">Congrats</h4>
+          <p>{{session('sucess')}}</p>
+        </div>
+    @endif
         <div class="container" style="padding:20px">
             <h2>Pertanyaan Soal Tipe A</h2>
             <form action="{{route('question.store')}}" method="post" id="Form1">
                 @csrf
                 <input type="hidden" name="questionType" value="A">
-                @for ($i = 1; $i < 3; $i++)
+                @for ($i = 1; $i <= 11; $i++)
                 <div id="{{'problem'.$i}}">
                     <p><b>Pertanyaan {{$i}}</b></p>
                     <div class="row">
@@ -89,8 +81,14 @@
                         <textarea name="{{'feedbackincorReason'.$i}}" cols="50" rows="2" class="wysiwyg-editor form-control" id={{"feedbackResIncor-editor-".$i}}></textarea>
                     </div>
                 </div>
-                <hr>
                 @endfor
+                <nav aria-label="Page navigation problem">
+                    <ul class="pagination justify-content-center"">
+                        @for ($i = 1; $i <= 11; $i++)
+                            <li class="page-item"  onclick="toggleDiv({{$i}},this.id)" id="pageProb{{$i}}"><a class="page-link">{{$i}}</a></li>
+                        @endfor
+                    </ul>
+                </nav>
                 <button type="submit" form="Form1" value="Submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

@@ -26,7 +26,6 @@
         @yield('adminsection')
     </body>
     <script src="//cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
-
     <script type="text/javascript">
         window.onload = function () {
             for (let index = 1; index <= 2; index++) {
@@ -83,19 +82,33 @@
             //     filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
             //     filebrowserUploadMethod: 'form'
             // });
-            var totalNumberOfproblems = 2;
-                for(var i=2; i<=totalNumberOfproblems; i++){
+            var totalNumberOfproblems = 11;
+            for(var i=2; i<=totalNumberOfproblems; i++){
+                if (document.getElementById('problem'+i)) {
+                    document.getElementById('problem'+i).style.display='none';
+                }
+            }
 
+
+        }
+        function toggleDiv(id,pagingId){
+                var totalNumberOfproblems = 11;
+                for(var i=1; i<=totalNumberOfproblems; i++){
                     if (document.getElementById('problem'+i)) {
-
                         document.getElementById('problem'+i).style.display='none';
                     }
-
                 }
                 if (document.getElementById('problem'+id)) {
                     document.getElementById('problem'+id).style.display='block';
                 }
+                // clear all class active
+                for(var i=1; i<=totalNumberOfproblems; i++){
+                    var el = document.getElementById('pageProb'+i);
+                    el.classList.remove('active');
+                }
+                // add active to clicked 
+                var element = document.getElementById(pagingId);
+                element.classList.add("active");
         }
-
     </script>
 </html>

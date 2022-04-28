@@ -78,7 +78,7 @@ class QuestionController extends Controller
             }
             try {
                 Question::insert($data);
-                return redirect()->route('question.create');
+                return redirect()->route('question.create')->with('success','Data Berhasil disimpan');
             } catch (\Throwable $th) {
                 print('error insert');
                 throw $th;

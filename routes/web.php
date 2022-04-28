@@ -4,7 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AppController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CkeditorController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +36,6 @@ Route::prefix('/admin')->group(function(){
     Route::get('/export', [AdminController::class, 'export']);
 });
 Route::post('/ckeditor/upload',[CkeditorController::class,'upload'])->name('ckeditor.image-upload');
+Route::get('/login',[AuthController::class,'login'])->name('login');
+Route::get('/register',[AuthController::class,'register'])->name('register');
+Route::post('/authenticate',[AuthController::class, 'authenticate'])->name('authenticate');
