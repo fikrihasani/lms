@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Auth;
 // });
 
 Route::get('/',[AppController::class,'index']);
-Route::get('/info',[AppController::class,'info']);
+Route::get('/informasi',[AppController::class,'informasi']);
 Route::get('/answer',[AppController::class,'answer']);
 Route::get('/answer/result/{id}',[AppController::class,'result']);
 Route::post('/answerStore',[AppController::class,'answerStore']);

@@ -15,8 +15,8 @@ class AppController extends Controller
         return view("index");
     }
 
-    public function info(){
-        return view("info");
+    public function informasi(){
+        return view("informasi");
     }
 
     public function answer(){

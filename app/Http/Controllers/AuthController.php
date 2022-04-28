@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\School;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use PDO;
 
 class AuthController extends Controller
@@ -19,13 +20,17 @@ class AuthController extends Controller
     }
 
     public function authenticate(Request $request){
-        $request->validate([
+        $credential = $request->validate([
             'email'=>'required|email:dns',
             'password'=>'required'
         ]);
-        dd('berhasil masuk');
-
+        if (Auth::attempt($credential)) {
+            $request->session()->regenerate();
+            return redirect()->intended('/admin');
+        }
+        return back()->with('loginError','Login Failed');
     }
     public function logout(){
+
     }
 }

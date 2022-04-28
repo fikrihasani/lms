@@ -5,31 +5,25 @@
             <form action="answerStore" method="post">
               @csrf
               <div class="row">
-
                 <div class="col-md-6">
                   <h3>Isilah Data diri dengan benar, agar memudahkan pendataan dan penghitungan hasil</h3>
+                  <div class="alert alert-warning" role="alert">
+                    <p>Jangan meninggalkan halaman pengerjaan jika tidak ingin data tidak tersimpan</p>
+                  </div>
                 </div>
                 <div class="col-md-6">
-                  <table>
-                    <tr>
-                      <td>Nama: </td>
-                      <td>
-                        <input type="text" name="nama_lengkap" class="form-control">
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Asal Sekolah: </td>
-                      <td>
-                        <input type="text" name="sekolah" class="form-control">
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Kelas (contoh 6A atau VIA): </td>
-                      <td>
-                        <input type="text" name="kelas" class="form-control">
-                      </td>
-                    </tr>
-                  </table>
+                  <div class="md-3">
+                    <label for="nama_lengkap">Nama Lengkap</label>
+                    <input type="text" name="nama_lengkap" id="nama_lengkap" class="form-control">
+                  </div>
+                  <div class="md-3">
+                    <label for="sekolah">Sekolah Asal</label>
+                    <input type="text" name="sekolah" id="sekolah" class="form-control">
+                  </div>
+                  <div class="md-3">
+                    <label for="kelas">Kelas</label>
+                    <input type="text" name="kelas" class="form-control">
+                  </div>
                 </div>
               </div>
               <hr>
