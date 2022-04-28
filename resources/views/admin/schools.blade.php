@@ -2,31 +2,11 @@
 @section('adminsection')
 <div class="container">
     
-    <form action="" method="post">
+    <form action="{{route('admin.schools.store')}}" method="post">
         @csrf
-        <table class="table">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td scope="row"></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td scope="row"></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </tbody>
-        </table>
+        <label for="schoolName">Nama Sekolah</label>
+        <input type="text" name="schoolName" id="schoolName" class="form-control">
         
-        <input type="text" name="schoolName" id="" class="form-control">
         <input type="text" name="className" id="" class="form-control">
     </form>
     @php

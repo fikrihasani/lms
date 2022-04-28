@@ -10,11 +10,6 @@ use PDO;
 class AuthController extends Controller
 {
     //
-    public function register(){
-        $schools = School::all();
-        return view('register',['schools'=>$schools]);
-    }
-    
     public function login(){
         return view('login');
     }

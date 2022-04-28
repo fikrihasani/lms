@@ -2,7 +2,7 @@
 @extends('template')
 @section('usersection')
     <div class="container">
-        <form action="route('authenticate')" method="post" style="padding:20px">
+        <form action="route('register.store')" method="post" style="padding:20px">
             @csrf
             <div style="margin-bottom:10px">
                 <div class="form-floating" style="margin: 5px">

@@ -57,4 +57,8 @@ class AdminController extends Controller
         }
         return view('admin.schools',['data'=>$data,'model'=>$modelSchool]);
     }
+
+    public function storeSchool(Request $request){
+        
+    }
 }

@@ -6,6 +6,8 @@ use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CkeditorController;
+use App\Http\Controllers\RegisterController;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -37,5 +39,8 @@ Route::prefix('/admin')->group(function(){
 });
 Route::post('/ckeditor/upload',[CkeditorController::class,'upload'])->name('ckeditor.image-upload');
 Route::get('/login',[AuthController::class,'login'])->name('login');
-Route::get('/register',[AuthController::class,'register'])->name('register');
+Route::get('/register',[RegisterController::class,'register'])->name('register');
+Route::get('/register/admin',[RegisterController::class,'registerAdmin'])->name('register.admin');
+Route::post('/register/store',[RegisterController::class,'store'])->name('register.store');
+Route::post('/register/admin/store',[RegisterController::class,'storeAdmin'])->name('register.admin.store');
 Route::post('/authenticate',[AuthController::class, 'authenticate'])->name('authenticate');

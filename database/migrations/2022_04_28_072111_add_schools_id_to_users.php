@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->integer('role');
+            $table->foreignId("schools_id")->nullable(true)->constrained()->onDelete('cascade');
         });
     }
 
@@ -28,7 +28,8 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             //
-            $table->dropColumn('role');
+            $table->dropForeign(['schools_id']);
+            $table->dropColumn('schools_id');
         });
     }
 };

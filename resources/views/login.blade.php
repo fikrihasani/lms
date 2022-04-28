@@ -2,6 +2,12 @@
 @extends('template')
 @section('usersection')
 <div class="container">
+    @if (session()->has('success'))
+    <div class="alert alert-success" role="alert">
+      <h4 class="alert-heading">Berhasil mendatakan akun</h4>
+      <p>{{session('success')}}</p>
+    </div>
+    @endif
     <div class="row">
         <div class="col-lg-6 offset-lg-3">
             <form action="{{route('authenticate')}}" method="post">
