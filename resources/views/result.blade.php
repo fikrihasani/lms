@@ -4,7 +4,7 @@
         <div class="container">
             <div style="padding-bottom: 20px">
                 <b>Data Diri: </b>
-                <table>
+                <table class="table">
                     <tr>
                       <td>Nama: </td>
                       <td>
@@ -14,13 +14,13 @@
                     <tr>
                       <td>Asal Sekolah:</td>
                       <td>
-                        {!!$dataDiri->sekolah!!}
+                        {!!$dataDiri->nama_sekolah!!}
                       </td>
                     </tr>
                     <tr>
                       <td>Kelas: </td>
                       <td>
-                        {!!$dataDiri->kelas!!}
+                        {!!$dataDiri->nama_kelas!!}
                       </td>
                     </tr>
                 </table>
@@ -30,7 +30,7 @@
             @endphp
             @foreach ($model as $q)
               {{-- {!!-- <input type="hidden" name="{!!'questions_id'.$loop->iteration + $data->firstItem() - 1!!}" value="{!!$q->id!!}"> --!!} --}}
-                <div>
+                <div id="answerResult{{$i}}">
                     <p><b>Soal no: {!! $i !!}</b></p>
                     <p>{!!$q->narration!!}</p>
                     <p>Jawaban Kamu: </p>
@@ -118,12 +118,17 @@
                     <p>Tingkat keyakinan jawaban dan alasan:</p>
                     <p>{!!$q->degreeBelieve!!}</p>
                 </div>
-                <br>
                 @php
                     $i++;
                 @endphp
             @endforeach
-        </div>
-        
+        </div>     
+        <nav aria-label="Page navigation problem">
+            <ul class="pagination justify-content-center"">
+                @for ($i = 1; $i <= 11; $i++)
+                    <li class="page-item"  onclick="toggleResAns({{$i}},this.id)" id="pageResAns{{$i}}"><a class="page-link">{{$i}}</a></li>
+                @endfor
+            </ul>
+          </nav>
 @endsection
 

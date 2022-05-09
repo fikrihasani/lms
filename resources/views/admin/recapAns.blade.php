@@ -8,9 +8,15 @@
         <thead>
             <tr>
                 <th>No</th>
+                <th>Nama Lengkap</th>
+                <th>Sekolah</th>
+                <th>Kelas</th>
+                <th>Waktu</th>
                 <th>Jawaban Soal</th>
                 <th>Jawaban Alasan</th>
                 <th>Keyakinan</th>
+                <th>Kategori</th>
+                <th>Skor</th>
             </tr>
         </thead>
         <tbody>
@@ -20,27 +26,31 @@
                     {{$i}}
                 </td>
                 <td>
-                    {{-- @if ($row->ansProb == $row->trueAns)
-                        Benar
-                    @else
-                        Salah
-                    @endif --}}
+                    {{$row["nama_lengkap"]}}
+                </td>
+                <td>
+                    {{$row["sekolah"]}}
+                </td>
+                <td>
+                    {{$row["kelas"]}}
+                </td>
+                <td>
+                    {{$row["waktu"]}}
+                </td>
+                <td>
                     {{$row["soal"]}}
                 </td>
                 <td>
-                    {{-- @if ($row->ansReason == $row->trueAnsReason)
-                        Benar
-                    @else
-                        Salah
-                    @endif --}}
                     {{$row["alasan"]}}
                 </td>
                 <td>
-                        {{-- Tidak Yakin
-                    @else
-                        Yakin
-                    @endif --}}
                     {{$row["keyakinan"]}}
+                </td>
+                <td>
+                    {{$row["kategori"]}}
+                </td>
+                <td>
+                    {{$row["skor"]}}
                 </td>
             </tr>
             @php

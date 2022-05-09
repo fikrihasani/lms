@@ -50,6 +50,11 @@
                     document.getElementById('problemAns'+i).style.display='none';
                 }
             }
+            for (let index = 2; index <= totalNumberOfproblems; index++) {
+              if (document.getElementById('answerResult'+index)) {
+                document.getElementById('answerResult'+index).style.display='none';
+              }
+            }
         }
         // json request
         function check(id){
@@ -105,6 +110,26 @@
                 // clear all class active
                 for(var i=1; i<=totalNumberOfproblems; i++){
                     var el = document.getElementById('pageProbAns'+i);
+                    el.classList.remove('active');
+                }
+                // add active to clicked 
+                var element = document.getElementById(pagingId);
+                element.classList.add("active");
+        }
+        // function toggle div result
+        function toggleResAns(id,pagingId){
+                var totalNumberOfproblems = 11;
+                for(var i=1; i<=totalNumberOfproblems; i++){
+                    if (document.getElementById('answerResult'+i)) {
+                        document.getElementById('answerResult'+i).style.display='none';
+                    }
+                }
+                if (document.getElementById('answerResult'+id)) {
+                    document.getElementById('answerResult'+id).style.display='block';
+                }
+                // clear all class active
+                for(var i=1; i<=totalNumberOfproblems; i++){
+                    var el = document.getElementById('pageResAns'+i);
                     el.classList.remove('active');
                 }
                 // add active to clicked 

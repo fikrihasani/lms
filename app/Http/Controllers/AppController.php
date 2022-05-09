@@ -45,13 +45,19 @@ class AppController extends Controller
     }
 
     public function result($id){
+        // pagination
         $model = DB::table('answers')
+        ->select('answers.*','questions.*','kelas.name as nama_kelas','schools.name as nama_sekolah')
         ->join('questions','answers.questions_id','=','questions.id')
         ->join('kelas','answers.kelas_id','=','kelas.id')
-        ->select('answers.*','questions.*','kelas.name')
+        ->join('schools','kelas.schools_id','=','schools.id')
         ->where('answers.answer_sessions_id','=',$id)->get();
-        $dataDiri = Answer::where('answer_sessions_id','=',$id)->first();
-        return print_r($dataDiri);
+        // data diri
+        $dataDiri = DB::table('kelas')
+        ->select('kelas.name as nama_kelas', 'schools.name as nama_sekolah', 'answers.nama_lengkap')
+        ->join('schools','kelas.schools_id','=','schools.id')
+        ->join('answers','kelas.id','=','answers.kelas_id')
+        ->where('answers.answer_sessions_id','=',$id)->first();
         return view('result',['model'=>$model,'dataDiri'=>$dataDiri]);
     }
 
