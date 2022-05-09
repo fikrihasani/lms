@@ -126,17 +126,7 @@ class AdminController extends Controller
         }
     }
 
-    public function recapAns(){
-        $model = DB::table('answers')
-        ->join('questions','answers.questions_id','=','questions.id')
-        ->join('kelas','answers.kelas_id','=','kelas.id')
-        ->join('schools','kelas.schools_id','=','schools.id')
-        ->join('answer_sessions','answers.answer_sessions_id','=','answer_sessions.id')
-        ->select('answers.*','questions.trueAns','questions.trueAnsReason','kelas.name as nama_kelas','schools.name as nama_sekolah','answer_sessions.created_at')
-        ->get();
-        // $model = Answer::all();
-
-        $ansSes = AnswerSession::all();
+    private function convertAnswerData(Collection $model) : array{
         $data = array();
         $i = 1;
         foreach ($model as $ans) {
@@ -156,12 +146,27 @@ class AdminController extends Controller
             array_push($data,$tmp);
             $i++;
         }
+        return $data;
+    }
+    public function recapAns(){
+        // get answer data 
+        $model = DB::table('answers')
+        ->join('questions','answers.questions_id','=','questions.id')
+        ->join('kelas','answers.kelas_id','=','kelas.id')
+        ->join('schools','kelas.schools_id','=','schools.id')
+        ->join('answer_sessions','answers.answer_sessions_id','=','answer_sessions.id')
+        ->select('answers.*','questions.trueAns','questions.trueAnsReason','kelas.name as nama_kelas','schools.name as nama_sekolah','answer_sessions.created_at')
+        ->get();
+        // get unique answer session data and convert to array
+        $ansSes = AnswerSession::all()->toArray();
+        // convert answer collection to array as specified
+        $data = $this->convertAnswerData($model);
         $recaps = array();
-        $ses = $ansSes->toArray();
-        $check = $this->convertToRecap($ses[0]["id"],$data);
+        $check = $this->convertToRecap($ansSes[0]["id"],$data);
         array_push($recaps,$check[0]);
-        for($i = 1; $i<count($ses); $i++) {
-            $check = $this->convertToRecap($ses[$i]["id"],$check[1]);
+        // convert array to the needed array data format
+        for($i = 1; $i<count($ansSes); $i++) {
+            $check = $this->convertToRecap($ansSes[$i]["id"],$check[1]);
             array_push($recaps,$check[0]);
         }
         $schools = School::all();

@@ -67,50 +67,72 @@
     <script type="text/javascript">
         window.onload = function () {
             for (let index = 1; index <= 11; index++) {
-                CKEDITOR.replace('question-editor-'+index,{
-                    filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
-                    filebrowserUploadMethod: 'form'
-                });
-                CKEDITOR.replace('answerA-editor-'+index,{
-                    filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
-                    filebrowserUploadMethod: 'form'
-                });
-                CKEDITOR.replace('answerB-editor-'+index,{
-                    filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
-                    filebrowserUploadMethod: 'form'
-                });
-                CKEDITOR.replace('answerC-editor-'+index,{
-                    filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
-                    filebrowserUploadMethod: 'form'
-                });
-                CKEDITOR.replace('reasonA-editor-'+index,{
-                    filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
-                    filebrowserUploadMethod: 'form'
-                });
-                CKEDITOR.replace('reasonB-editor-'+index,{
-                    filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
-                    filebrowserUploadMethod: 'form'
-                });
-                CKEDITOR.replace('reasonC-editor-'+index,{
-                    filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
-                    filebrowserUploadMethod: 'form'
-                });
-                CKEDITOR.replace('feedbackCor-editor-'+index,{
-                    filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
-                    filebrowserUploadMethod: 'form'
-                });
-                CKEDITOR.replace('feedbackIncor-editor-'+index,{
-                    filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
-                    filebrowserUploadMethod: 'form'
-                });
-                CKEDITOR.replace('feedbackResCor-editor-'+index,{
-                    filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
-                    filebrowserUploadMethod: 'form'
-                });
-                CKEDITOR.replace('feedbackResIncor-editor-'+index,{
-                    filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
-                    filebrowserUploadMethod: 'form'
-                });
+                if (document.getElementById('question-editor-'+index)) {
+                    CKEDITOR.replace('question-editor-'+index,{
+                        filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+                        filebrowserUploadMethod: 'form'
+                    });
+                }
+                if(document.getElementById('answerA-editor-'+index)){
+                    CKEDITOR.replace('answerA-editor-'+index,{
+                        filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+                        filebrowserUploadMethod: 'form'
+                    });
+                }
+                if (document.getElementById('answerB-editor-'+index)) {
+                    CKEDITOR.replace('answerB-editor-'+index,{
+                        filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+                        filebrowserUploadMethod: 'form'
+                    });
+                }
+                if (document.getElementById('answerC-editor-'+index)) {
+                    CKEDITOR.replace('answerC-editor-'+index,{
+                        filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+                        filebrowserUploadMethod: 'form'
+                    });
+                }
+                if (document.getElementById('reasonA-editor-'+index)) {
+                    CKEDITOR.replace('reasonA-editor-'+index,{
+                        filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+                        filebrowserUploadMethod: 'form'
+                    });
+                }
+                if (document.getElementById('reasonB-editor-'+index)) {
+                    CKEDITOR.replace('reasonB-editor-'+index,{
+                        filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+                        filebrowserUploadMethod: 'form'
+                    });
+                }
+                if (document.getElementById('reasonC-editor-'+index)) {
+                    CKEDITOR.replace('reasonC-editor-'+index,{
+                        filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+                        filebrowserUploadMethod: 'form'
+                    });
+                }
+                if (document.getElementById('feedbackCor-editor-'+index)) {
+                    CKEDITOR.replace('feedbackCor-editor-'+index,{
+                        filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+                        filebrowserUploadMethod: 'form'
+                    });
+                }
+                if (document.getElementById('feedbackIncor-editor-'+index)) {
+                    CKEDITOR.replace('feedbackIncor-editor-'+index,{
+                        filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+                        filebrowserUploadMethod: 'form'
+                    });
+                }
+                if (document.getElementById('feedbackResCor-editor-'+index)) {
+                    CKEDITOR.replace('feedbackResCor-editor-'+index,{
+                        filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+                        filebrowserUploadMethod: 'form'
+                    });
+                }
+                if (document.getElementById('feedbackResIncor-editor-'+index)) {
+                    CKEDITOR.replace('feedbackResIncor-editor-'+index,{
+                        filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
+                        filebrowserUploadMethod: 'form'
+                    });
+                }
             }
             // CKEDITOR.replace('wysiwyg-editor',{
             //     filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
@@ -126,8 +148,32 @@
                     document.getElementById('problem'+i).style.display='none';
                 }
             }
+        }
+                // get td elements
+        function getData(optionText){
+            let tr = document.getElementsByClassName("row-datas");
+            var pos;
+            if (optionText.options[optionText.selectedIndex].text == "") {
+                for (let index = 0; index < tr.length; index++) {
+                    tr[index].style.display='';
+                }
+            }else{
+                for (let index = 0; index < tr.length; index++) {
+                    if(optionText.options[optionText.selectedIndex].text == tr[index].children[1].dataset.school){
+                        tr[index].style.display='';
 
+                    }else{
+                        tr[index].style.display='none';
 
+                    }
+                }
+                // for (let index = 0; index < tr.length; index++) {
+                //     if (index != pos) {
+                //         tr[index].style.display='none';
+                //     }
+                // }
+                // tr[pos].style.display='block';
+            }
         }
         function addKelasElement(){
             var cc = document.getElementsByClassName("className").length;
