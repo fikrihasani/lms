@@ -7,6 +7,7 @@ use App\Models\Answer;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\AnswerRecapExport;
+use App\Models\AnswerSession;
 use Illuminate\Support\Collection;
 use App\Models\School;
 use App\Models\Kelas;
@@ -55,10 +56,41 @@ class AdminController extends Controller
         
     }
 
-    // private function convertArray() : array{
-
-    //     return ;
-    // }
+    private function convertToRecap(int $answerSessionId,array $dataCollection) : array{
+        $tmp = array();
+        if (count($dataCollection) == 0) {
+            # code...
+            return [[],[]];
+        }
+        $i = 0;
+        $totalData = count($dataCollection);
+        $prob = 1;
+        while ($i < $totalData) {
+            # code...
+            if ($dataCollection[$i]["answer_sessions_id"] == $answerSessionId) {
+                # code...
+                $tmp["nama_lengkap"] = $dataCollection[$i]["nama_lengkap"];
+                $tmp["kelas"] = $dataCollection[$i]["kelas"];
+                $tmp["sekolah"] = $dataCollection[$i]["sekolah"];
+                $tmp["answer_sessions_id"] = $dataCollection[$i]["answer_sessions_id"];
+                while ($i < $totalData && $dataCollection[$i]["answer_sessions_id"] == $answerSessionId){
+                    # code...
+                    $tmp["soal_".$prob] = $dataCollection[$i]["soal"];
+                    $tmp["alasan_soal_".$prob] = $dataCollection[$i]["alasan"];
+                    $tmp["keyakinan_soal_".$prob] = $dataCollection[$i]["keyakinan"];
+                    $tmp["kategori_".$prob] = $dataCollection[$i]["kategori"];
+                    $tmp["skor_".$prob] = $dataCollection[$i]["skor"];
+                    $tmp["waktu_".$prob] = $dataCollection[$i]["waktu"];
+                    unset($dataCollection[$i]);
+                    $i++;
+                    $prob++;
+                }
+            }else{
+                $i++;
+            }
+        }
+        return [$tmp,array_values($dataCollection)];
+    }
     private function skorThreeTier($firstTier, $secondTier, $thirdTier) : int{
         if ($firstTier == "Benar" && $secondTier == "Benar" && $thirdTier == "Yakin") {
             # code...
@@ -103,6 +135,8 @@ class AdminController extends Controller
         ->select('answers.*','questions.trueAns','questions.trueAnsReason','kelas.name as nama_kelas','schools.name as nama_sekolah','answer_sessions.created_at')
         ->get();
         // $model = Answer::all();
+
+        $ansSes = AnswerSession::all();
         $data = array();
         $i = 1;
         foreach ($model as $ans) {
@@ -112,6 +146,7 @@ class AdminController extends Controller
             $tmp["nama_lengkap"] = $ans->nama_lengkap;
             $tmp["sekolah"] = $ans->nama_sekolah;
             $tmp["kelas"] = $ans->nama_kelas;
+            $tmp["answer_sessions_id"] = $ans->answer_sessions_id;
             $tmp["waktu"] = date("d-m-Y", strtotime($ans->created_at));
             $tmp["soal"] = ($ans->ansProb == $ans->trueAns) ? "Benar" : "Salah";
             $tmp["alasan"] = ($ans->ansReason == $ans->trueAnsReason) ? "Benar" : "Salah";
@@ -121,10 +156,18 @@ class AdminController extends Controller
             array_push($data,$tmp);
             $i++;
         }
-        $answer = collect($data);
-        return view('admin.recapAns',["answer"=>$answer]);
+        $recaps = array();
+        $ses = $ansSes->toArray();
+        $check = $this->convertToRecap($ses[0]["id"],$data);
+        array_push($recaps,$check[0]);
+        for($i = 1; $i<count($ses); $i++) {
+            $check = $this->convertToRecap($ses[$i]["id"],$check[1]);
+            array_push($recaps,$check[0]);
+        }
+        $schools = School::all();
+        return view('admin.recapAns',["answer"=>collect($recaps), 'schools'=>$schools]);
     }
-
+    
     public function export(){
         return Excel::download(new AnswerRecapExport, 'recap.xlsx');
     }
