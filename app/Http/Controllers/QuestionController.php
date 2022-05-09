@@ -57,7 +57,7 @@ class QuestionController extends Controller
             print($questionType);
             print("<br>");
             $data = array();
-            for ($i=1; $i < 3; $i++) { 
+            for ($i=1; $i <= 11; $i++) { 
                 # code...
                 $tmp = array();
                 $tmp["narration"] = $request["narration".$i];

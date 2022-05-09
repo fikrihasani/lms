@@ -4,7 +4,7 @@
     @if (session('success'))
         <div class="alert alert-success" role="alert">
           <h4 class="alert-heading">Congrats</h4>
-          <p>{{session('sucess')}}</p>
+          <p>{{session('success')}}</p>
         </div>
     @endif
         <div class="container" style="padding:20px">
@@ -18,7 +18,7 @@
                     <div class="row">
                         <div class="mb-3">
                             <label class="form-label">Narasi Pertanyaan</label>
-                            <textarea name="{{'narration'.$i}}" cols="50" rows="5" class="wysiwyg-editor form-control" id={{"question-editor-".$i}}></textarea>
+                            <textarea name="{{'narration'.$i}}" cols="50" rows="5" class="wysiwyg-editor form-control" id={{"question-editor-".$i}}>Narasi soal {{$i}}</textarea>
                         </div>
                         <div class="mb-3">
                             <label class="form-label">Jawaban A</label>
@@ -66,19 +66,19 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Feedback Jawaban Benar</label>
-                        <textarea name="{{'feedbackcorAns'.$i}}" cols="50" rows="2" class="wysiwyg-editor form-control" id={{"feedbackCor-editor-".$i}}></textarea>
+                        <textarea name="{{'feedbackcorAns'.$i}}" cols="50" rows="2" class="wysiwyg-editor form-control" id={{"feedbackCor-editor-".$i}}>Feedback benar soal {{$i}}</textarea>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Feedback Jawaban Salah</label>
-                        <textarea name="{{'feedbackincorAns'.$i}}" cols="50" rows="2" class="wysiwyg-editor form-control" id={{"feedbackIncor-editor-".$i}}></textarea>
+                        <textarea name="{{'feedbackincorAns'.$i}}" cols="50" rows="2" class="wysiwyg-editor form-control" id={{"feedbackIncor-editor-".$i}}>Feedback salah soal {{$i}}</textarea>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Feedback Alasan Benar</label>
-                        <textarea name="{{'feedbackcorReason'.$i}}" cols="50" rows="2" class="wysiwyg-editor form-control" id={{"feedbackResCor-editor-".$i}}></textarea>
+                        <textarea name="{{'feedbackcorReason'.$i}}" cols="50" rows="2" class="wysiwyg-editor form-control" id={{"feedbackResCor-editor-".$i}}>Feedback alasan benar {{$i}}</textarea>
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Feedback Alasan Salah</label>
-                        <textarea name="{{'feedbackincorReason'.$i}}" cols="50" rows="2" class="wysiwyg-editor form-control" id={{"feedbackResIncor-editor-".$i}}></textarea>
+                        <textarea name="{{'feedbackincorReason'.$i}}" cols="50" rows="2" class="wysiwyg-editor form-control" id={{"feedbackResIncor-editor-".$i}}>Feedback alasan salah{{$i}}</textarea>
                     </div>
                 </div>
                 @endfor

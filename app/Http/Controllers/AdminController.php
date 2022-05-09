@@ -47,18 +47,4 @@ class AdminController extends Controller
     public function export(){
         return Excel::download(new AnswerRecapExport, 'recap.xlsx');
     }
-
-    public function createSchool(){
-        $modelSchool = School::all();
-        $data = False;
-        if (count($modelSchool)>0) {
-            # code...
-              $data = True;
-        }
-        return view('admin.schools',['data'=>$data,'model'=>$modelSchool]);
-    }
-
-    public function storeSchool(Request $request){
-        
-    }
 }

@@ -42,6 +42,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
     <script>
+      // hide questions
         window.onload = function(){
             var totalNumberOfproblems = 11;
             for(var i=2; i<=totalNumberOfproblems; i++){
@@ -50,6 +51,47 @@
                 }
             }
         }
+        // json request
+        function check(id){
+          alert("heee ini datanya "+id);
+          var objXMLHttpRequest = new XMLHttpRequest();
+          objXMLHttpRequest.onreadystatechange = function() {
+            if(objXMLHttpRequest.readyState === 4) {
+              if(objXMLHttpRequest.status === 200) {
+                  parseJsonForOption(objXMLHttpRequest.responseText);
+              } else {
+                    alert('Error Code: ' +  objXMLHttpRequest.status);
+                    alert('Error Message: ' + objXMLHttpRequest.statusText);
+              }
+            }
+          }
+          objXMLHttpRequest.open('GET', '/kelas/'+id);
+          objXMLHttpRequest.send();
+        }
+        // parse json and insert option
+        function parseJsonForOption(text){
+          const obj = JSON.parse(text);
+          var selectEl = document.getElementById("kelasOption");
+          // clearOptionFromSelect(selectEl);
+          clearOptionFromSelect(document.querySelectorAll(".kelasOptionDatas"));
+          obj.forEach(element => {
+            console.log(element.id);
+            var option = document.createElement("option");
+            option.setAttribute("value", element.id);
+            option.setAttribute("id", "kelasOption"+element.id);
+            option.classList.add("form-control");
+            option.classList.add("kelasOptionDatas");
+            option.text = element.name;
+            selectEl.add(option);
+          });
+        }
+        // clear selected 
+        function clearOptionFromSelect(el){
+          if (el.length > 0) {
+            el.forEach(o => o.remove());
+          }
+        }
+        // toggle div answers
         function toggleDivAns(id,pagingId){
                 var totalNumberOfproblems = 11;
                 for(var i=1; i<=totalNumberOfproblems; i++){

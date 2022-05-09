@@ -23,12 +23,50 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     </head>
     <body>
-        @yield('adminsection')
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">Dashboard</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admin/question/create">Pertanyaan</a>
+                    </li> 
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Data Sekolah dan Guru
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <li><a class="dropdown-item" href="/admin/school">Sekolah</a></li>
+                          <li><a class="dropdown-item" href="/admin/teacher">Guru</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Rekap Data Evaluasi</a>
+                    </li>
+                    </ul>
+                    <span class="navbar-text">
+                        <a class="nav-link" href="/login">
+                            Login
+                        </a>
+                    </span>
+                </div>
+            </div>
+        </nav>
+        <div>
+            @yield('adminsection')
+        </div>
     </body>
     <script src="//cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
     <script type="text/javascript">
         window.onload = function () {
-            for (let index = 1; index <= 2; index++) {
+            for (let index = 1; index <= 11; index++) {
                 CKEDITOR.replace('question-editor-'+index,{
                     filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
                     filebrowserUploadMethod: 'form'
@@ -90,6 +128,20 @@
             }
 
 
+        }
+        function addKelasElement(){
+            var cc = document.getElementsByClassName("className").length;
+            var form = document.getElementById("school-buttons");
+            var div = document.createElement('div');
+            div.setAttribute("class","mb-3");
+            var FN = document.createElement("input");
+            FN.setAttribute("type", "text");
+            FN.setAttribute("name", cc+1);
+            FN.setAttribute("placeholder", "Nama Kelas");
+            FN.classList.add("form-control");
+            FN.classList.add("className");
+            div.appendChild(FN);
+            form.before(div);
         }
         function toggleDiv(id,pagingId){
                 var totalNumberOfproblems = 11;
