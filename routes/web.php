@@ -36,7 +36,8 @@ Route::prefix('/admin')->group(function(){
     Route::get('/',[AdminController::class,'index']);
     Route::get("/recap",[AdminController::class,'recapAns']);
     Route::resource('/question', QuestionController::class);
-    Route::get('/export', [AdminController::class, 'export']);
+    Route::get('/question/data/{questionType}', [QuestionController::class,'showData']);
+    Route::get('/export/{idKelas}', [AdminController::class, 'export']);
     Route::get('/school',[SchoolController::class,'index'])->name('admin.school.index');
     Route::post('/school/store',[SchoolController::class,'store'])->name('admin.school.store');
 });

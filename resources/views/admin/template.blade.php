@@ -25,19 +25,26 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/">Dashboard</a>
+                <a class="navbar-brand" href="/admin">Dashboard</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                        <a class="nav-link active" aria-current="page" href="/admin">Home</a>
                     </li>
                 
-                    <li class="nav-item">
-                        <a class="nav-link" href="/admin/question/create">Pertanyaan</a>
-                    </li> 
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                          Data Pertanyaan
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <li><a class="dropdown-item" href="/admin/question/A">Pertanyaan Tipe A</a></li>
+                          <li><a class="dropdown-item" href="/admin/question/B">Pertanyaan Tipe B</a></li>
+                          <li><a class="dropdown-item" href="/admin/question/B">Buat Pertanyaan Baru</a></li>
+                        </ul>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                           Data Sekolah dan Guru
@@ -64,6 +71,8 @@
         </div>
     </body>
     <script src="//cdn.ckeditor.com/4.18.0/standard/ckeditor.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script type="text/javascript">
         window.onload = function () {
             for (let index = 1; index <= 11; index++) {
@@ -134,14 +143,6 @@
                     });
                 }
             }
-            // CKEDITOR.replace('wysiwyg-editor',{
-            //     filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
-            //     filebrowserUploadMethod: 'form'
-            // });
-            // CKEDITOR.replaceAll('.ckeditor', {
-            //     filebrowserUploadUrl: "{{route('ckeditor.image-upload', ['_token' => csrf_token() ])}}",
-            //     filebrowserUploadMethod: 'form'
-            // });
             var totalNumberOfproblems = 11;
             for(var i=2; i<=totalNumberOfproblems; i++){
                 if (document.getElementById('problem'+i)) {
@@ -149,7 +150,7 @@
                 }
             }
         }
-                // get td elements
+        // get td elements
         function getData(optionText){
             let tr = document.getElementsByClassName("row-datas");
             var pos;
@@ -159,7 +160,7 @@
                 }
             }else{
                 for (let index = 0; index < tr.length; index++) {
-                    if(optionText.options[optionText.selectedIndex].text == tr[index].children[1].dataset.school){
+                    if(optionText.options[optionText.selectedIndex].value == tr[index].children[2].dataset.class){
                         tr[index].style.display='';
 
                     }else{
@@ -167,14 +168,9 @@
 
                     }
                 }
-                // for (let index = 0; index < tr.length; index++) {
-                //     if (index != pos) {
-                //         tr[index].style.display='none';
-                //     }
-                // }
-                // tr[pos].style.display='block';
             }
         }
+        // add kelas to the view in create school
         function addKelasElement(){
             var cc = document.getElementsByClassName("className").length;
             var form = document.getElementById("school-buttons");
@@ -189,6 +185,7 @@
             div.appendChild(FN);
             form.before(div);
         }
+        // toggle div when create a questions
         function toggleDiv(id,pagingId){
                 var totalNumberOfproblems = 11;
                 for(var i=1; i<=totalNumberOfproblems; i++){
@@ -207,6 +204,51 @@
                 // add active to clicked 
                 var element = document.getElementById(pagingId);
                 element.classList.add("active");
+        }
+        // ajax request for school and kelas
+                // json request t0 get data from backend
+        function check(id){
+          var objXMLHttpRequest = new XMLHttpRequest();
+          objXMLHttpRequest.onreadystatechange = function() {
+            if(objXMLHttpRequest.readyState === 4) {
+              if(objXMLHttpRequest.status === 200) {
+                  parseJsonForOption(objXMLHttpRequest.responseText);
+              } else {
+                    alert('Error Code: ' +  objXMLHttpRequest.status);
+                    alert('Error Message: ' + objXMLHttpRequest.statusText);
+              }
+            }
+          }
+          objXMLHttpRequest.open('GET', '/kelas/'+id);
+          objXMLHttpRequest.send();
+        }
+        // parse json and insert option
+        function parseJsonForOption(text){
+          const obj = JSON.parse(text);
+          var selectEl = document.getElementById("kelasList");
+          // clearOptionFromSelect(selectEl);
+          clearOptionFromSelect(document.querySelectorAll(".kelasOptionDatas"));
+          obj.forEach(element => {
+            console.log(element.id);
+            var option = document.createElement("option");
+            option.setAttribute("value", element.id);
+            option.setAttribute("id", "kelasOption"+element.id);
+            option.classList.add("form-control");
+            option.classList.add("kelasOptionDatas");
+            option.text = element.name;
+            selectEl.add(option);
+          });
+        }
+        // clear selected 
+        function clearOptionFromSelect(el){
+          if (el.length > 0) {
+            el.forEach(o => o.remove());
+          }
+        }
+        function exportData(){
+            var el = document.getElementById("kelasList");
+            alert(el.value);
+            window.location.href='/admin/export/'+el.value;
         }
     </script>
 </html>

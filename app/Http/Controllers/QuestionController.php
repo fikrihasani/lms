@@ -17,11 +17,15 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $tipeA = Question::where('questionType','=','A');
-        $tipeB = Question::where('questionType','=','B');
-        return view('admin.questions.index',['tipeA'=>$tipeA,'tipeB'=>$tipeB]);
+        // return "a";
+        // $questions = Question::where('questionType','=',$questionType)->paginate(1);
+        // return view('admin.questions.index',['questions'=>$questions]);
     }
 
+    public function showData($questionType){
+        $questions = Question::where('questionType','=',$questionType)->paginate(1);
+        return view('admin.questions.datas',['questions'=>$questions]);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -54,8 +58,6 @@ class QuestionController extends Controller
             # code...
             $input = $request->all();
             $questionType = $request->questionType; 
-            print($questionType);
-            print("<br>");
             $data = array();
             for ($i=1; $i <= 11; $i++) { 
                 # code...
@@ -95,6 +97,8 @@ class QuestionController extends Controller
     public function show($id)
     {
         //
+        $question = Question::where('id','=',$id)->first();
+        return view('admin.questions.show',['question'=>$question]);
     }
 
     /**
@@ -106,6 +110,9 @@ class QuestionController extends Controller
     public function edit($id)
     {
         //
+        $question = Question::where('id','=',$id)->first();
+        return view('admin.questions.edit',['question'=>$question]);
+
     }
 
     /**

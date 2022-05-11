@@ -6,7 +6,7 @@
             <div style="padding-bottom: 5px" class="row">
                 <div class="col-6">
                     <label for="schoolList">Pilih Sekolah</label>
-                    <select name="schoolFilter" id="schoolList" class="form-control" onchange="getData(this)">
+                    <select name="schoolFilter" id="schoolList" class="form-control" onchange="check(this.value)">
                         <option value=""></option>
                         @foreach ($schools as $s)
                         <option value="{{$s->id}}">{{$s->name}}</option>
@@ -15,7 +15,7 @@
                 </div>
                 <div class="col-6">
                     <label for="kelasList">Pilih Kelas</label>
-                    <select name="kelasFilter" id="kelasList" class="form-control">
+                    <select name="kelasFilter" id="kelasList" class="form-control"  onchange="getData(this)" >
                         <option value=""></option>
                     </select>
                 </div>
@@ -36,7 +36,6 @@
                     <th rowspan=2>Nama Lengkap</th>
                     <th rowspan=2>Sekolah</th>
                     <th rowspan=2>Kelas</th>
-                    {{-- <th rowspan=2>Waktu Pengerjaan</th> --}}
                     @for ($idx = 1; $idx <= 11; $idx++)
                     <th colspan=5 style="text-align: center">Soal no {{$idx}}</th>
                     @endfor
@@ -48,7 +47,6 @@
                     <th>Degree</th>
                     <th>Kategori</th>
                     <th>Skor</th>
-                        
                     @endfor
                 </tr>
             </thead>
@@ -61,7 +59,7 @@
                     <td data-school="{{$row["sekolah"]}}">
                         {{$row["sekolah"]}}
                     </td>
-                    <td data-class="{{$row["kelas"]}}">
+                    <td data-class="{{$row["kelas_id"]}}">
                         {{$row["kelas"]}}
                     </td>
                     {{-- <td>
@@ -92,9 +90,9 @@
             </tbody>
         </table>
     </div>
-    <a href="/admin/export">
-        <button type="button" class="btn btn-primary">Download Excel</button>
-    </a>
+    {{-- <a href="/admin/export"> --}}
+    <button type="button" class="btn btn-primary" onclick="exportData()">Download Excel</button>
+    {{-- </a> --}}
     
 </div>
 @endsection

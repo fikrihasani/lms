@@ -41,9 +41,12 @@
     </body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>
       // hide questions
         window.onload = function(){
+          // hide questions in answer page
             var totalNumberOfproblems = 11;
             for(var i=2; i<=totalNumberOfproblems; i++){
                 if (document.getElementById('problemAns'+i)) {
@@ -56,9 +59,8 @@
               }
             }
         }
-        // json request
+        // json request t0 get data from backend
         function check(id){
-          alert("heee ini datanya "+id);
           var objXMLHttpRequest = new XMLHttpRequest();
           objXMLHttpRequest.onreadystatechange = function() {
             if(objXMLHttpRequest.readyState === 4) {

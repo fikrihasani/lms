@@ -7,6 +7,11 @@
           <p>{{session('success')}}</p>
         </div>
     @endif
+        <div class="alert alert-info" role="alert">
+            <h4>Untuk cara bagaimana membuat persamaan dengan latex</h4>
+            <p>Silahkan cek pada link berikut: <a href="https://latex.codecogs.com/eqneditor/editor.php">referensi equation dengan latex</a></p>
+        </div>
+        
         <div class="container" style="padding:20px">
             <h2>Pertanyaan Soal Tipe A</h2>
             <form action="{{route('question.store')}}" method="post" id="Form1">
@@ -83,7 +88,7 @@
                 </div>
                 @endfor
                 <nav aria-label="Page navigation problem">
-                    <ul class="pagination justify-content-center"">
+                    <ul class="pagination justify-content-center">
                         @for ($i = 1; $i <= 11; $i++)
                             <li class="page-item"  onclick="toggleDiv({{$i}},this.id)" id="pageProb{{$i}}"><a class="page-link">{{$i}}</a></li>
                         @endfor

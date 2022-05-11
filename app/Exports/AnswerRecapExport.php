@@ -2,90 +2,39 @@
 
 namespace App\Exports;
 
+use App\Models\Answer;
+use App\Models\AnswerSession;
+use App\Models\School;
+use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class AnswerRecapExport implements FromCollection, WithHeadings
+class AnswerRecapExport implements FromView
 {
     /**
     * @return \Illuminate\Support\Collection
     */
-    public function collection()
+
+    public function __construct(int $idKelas)
     {
-        //
-        $model = DB::table('answers')
-        ->join('questions','answers.questions_id','=','questions.id')
-        ->select('answers.*','questions.trueAns','questions.trueAnsReason')
-        ->get();
-
-        $answer = collect($this->calcArray($model));
-        return $answer;
+        $this->idKelas = $idKelas;
     }
 
-    public function headings(): array
+    public function view(): View
     {
-        return [
-            'No',
-            'Nama Lengkap',
-            'Sekolah',
-            'Kelas',
-            'Jawaban Soal',
-            'Jawaban Alasan',
-            'Tingkat Keyakinan',
-        ];
-    }
+        $answer = new Answer();
+        // rekap all 
+        $model = $answer->queryAnswerRecapCondition($this->idKelas);
+        // get unique answer session data and convert to array
+        $ansSes = AnswerSession::all()->toArray();
+        // get answer data using answer session, all the formatting and calculation are being done  by answer class via recap answer method
+        // facade pattern
+        $ansDat = $answer->recapAnswer($ansSes,$this->idKelas);
+        $schools = School::all();
 
-    private function calcArray($model){
-        $data = array();
-        $i = 1;
-        foreach ($model as $ans) {
-            # code...
-            $tmp = array();
-            $tmp["row"] = $i;
-            $tmp["nama_lengkap"] = $ans->nama_lengkap;
-            $tmp["sekolah"] = $ans->sekolah;
-            $tmp["kelas"] = $ans->kelas;
-            $tmp["soal"] = ($ans->ansProb == $ans->trueAns) ? "Benar" : "Salah";
-            $tmp["alasan"] = ($ans->ansReason == $ans->trueAnsReason) ? "Benar" : "Salah";
-            $tmp["keyakinan"] = ($ans->degreeBelieve <= 2) ? "Tidak Yakin" : "Yakin";
-            $tmp["score"] = $this->calcScore(strtolower($tmp["soal"]),strtolower($tmp["alasan"]),strtolower($tmp["keyakinan"]));
-            array_push($data,$tmp);
-            $i++;
-        }
-        return $data;
-    }
-
-    private function calcScore($soal,$alasan,$keyakinan){
-        if ($soal == "benar"){
-            if($alasan == "benar"){
-                if($keyakinan == "yakin"){
-                    return 8;
-                }else{
-                    return 7;
-                }
-            }else{
-                if($alasan == "yakin"){
-                    return 4;
-                }else{
-                    return 3;
-                }
-            }
-        }else{
-            if ($alasan == "benar") {
-                if ($keyakinan == "yakin") {
-                    return 6;
-                }else {
-                    return 5;
-                }
-            }else{
-                if($keyakinan == "yakin"){
-                    return 2;
-                }else {
-                    return 1;
-                }
-            }
-        }
+        return view('admin.questions.recapExport',["answer"=>$ansDat, 'schools'=>$schools]);
     }
 }
