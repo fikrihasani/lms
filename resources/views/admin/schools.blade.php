@@ -1,4 +1,7 @@
 @extends('admin.template')
+@section('title')
+    {{ "School Data" }}
+@endsection
 @section('adminsection')
 <div class="container">
     <div class="mb-5">

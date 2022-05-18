@@ -18,9 +18,10 @@ class AnswerRecapExport implements FromView
     * @return \Illuminate\Support\Collection
     */
 
-    public function __construct(int $idKelas)
+    public function __construct(int $idKelas, int $isTeacher)
     {
         $this->idKelas = $idKelas;
+        $this->isTeacher = $isTeacher;
     }
 
     public function view(): View
@@ -32,7 +33,8 @@ class AnswerRecapExport implements FromView
         $ansSes = AnswerSession::all()->toArray();
         // get answer data using answer session, all the formatting and calculation are being done  by answer class via recap answer method
         // facade pattern
-        $ansDat = $answer->recapAnswer($ansSes,$this->idKelas);
+        // echo $this->idKelas;
+        $ansDat = $answer->recapAnswer($ansSes,$this->idKelas,$this->isTeacher);
         $schools = School::all();
 
         return view('admin.questions.recapExport',["answer"=>$ansDat, 'schools'=>$schools]);

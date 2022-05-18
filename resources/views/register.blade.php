@@ -1,5 +1,8 @@
 
 @extends('template')
+@section('title')
+    {{ "Registrasi" }}
+@endsection
 @section('usersection')
     <div class="container">
         @if ($errors->any())

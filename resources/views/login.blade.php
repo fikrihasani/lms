@@ -1,5 +1,8 @@
 
 @extends('template')
+@section('title')
+    {{ "login" }}
+@endsection
 @section('usersection')
 <div class="container">
     @if (session()->has('success'))

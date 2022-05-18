@@ -7,6 +7,16 @@
           <p>{{session('success')}}</p>
         </div>
     @endif
+    @if ($qBCount == 11 && $qACount == 11)
+        <div class="alert alert-info" role="alert">
+            <strong>Semua Pertanyaan Sudah dibuat</strong>
+            <br>
+            <br>
+            <a name="" id="" class="btn btn-info" href="/admin/question/probs/A" role="button">Cek Pertanyaan Tipe A</a>
+            <a name="" id="" class="btn btn-info" href="/admin/question/probs/B" role="button">Cek Pertanyaan Tipe B</a>
+        </div>
+        
+    @else
         <div class="alert alert-info" role="alert">
             <h4>Untuk cara bagaimana membuat persamaan dengan latex</h4>
             <p>Silahkan cek pada link berikut: <a href="https://latex.codecogs.com/eqneditor/editor.php">referensi equation dengan latex</a></p>
@@ -16,7 +26,13 @@
             <h2>Pertanyaan Soal Tipe A</h2>
             <form action="{{route('question.store')}}" method="post" id="Form1">
                 @csrf
-                <input type="hidden" name="questionType" value="A">
+                <select name="questionType" id="">
+                    @if ($qBCount == 11)
+                    <option value="A">Tipe Pertanyaan A</option>
+                    @else
+                    <option value="B">Tipe Pertanyaan B</option>
+                    @endif
+                </select>
                 @for ($i = 1; $i <= 11; $i++)
                 <div id="{{'problem'.$i}}">
                     <p><b>Pertanyaan {{$i}}</b></p>
@@ -97,4 +113,5 @@
                 <button type="submit" form="Form1" value="Submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
+    @endif
 @endsection

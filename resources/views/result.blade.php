@@ -1,5 +1,8 @@
 
 @extends('template')
+@section('title')
+    {{ "Hasil Jawaban" }}
+@endsection
 @section('usersection')
         <div class="container">
             <div style="padding-bottom: 20px">

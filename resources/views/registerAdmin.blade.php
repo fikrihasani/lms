@@ -1,5 +1,8 @@
 
 @extends('template')
+@section('title')
+    {{ "Registrasi Admin" }}
+@endsection
 @section('usersection')
     <div class="container">
         <form action="{{route('register.admin.store')}}" method="post" style="padding:20px">

@@ -21,11 +21,6 @@ class QuestionController extends Controller
         // $questions = Question::where('questionType','=',$questionType)->paginate(1);
         // return view('admin.questions.index',['questions'=>$questions]);
     }
-
-    public function showData($questionType){
-        $questions = Question::where('questionType','=',$questionType)->paginate(1);
-        return view('admin.questions.datas',['questions'=>$questions]);
-    }
     /**
      * Show the form for creating a new resource.
      *
@@ -41,7 +36,10 @@ class QuestionController extends Controller
         //         "narration",
         //     ]);
         // }
-        return view('admin.questions.create');
+
+        $questionA = Question::where('questionType','=','A')->get();
+        $questionB = Question::where('questionType','=','B')->get();
+        return view('admin.questions.create',['qACount'=>count($questionA),'qBCount'=>count($questionB)]);
 
     }
 
@@ -94,6 +92,13 @@ class QuestionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function probs($questionType)
+    {
+        //
+        $question = Question::where('questionType','=',$questionType)->get();
+        return view('admin.questions.probs',['question'=>$question]);
+    }
+
     public function show($id)
     {
         //
@@ -125,6 +130,26 @@ class QuestionController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $q = Question::find($id);
+ 
+        $q->narration = $request->narration;
+        $q->answerA = $request->answerA;
+        $q->answerB = $request->answerB;
+        $q->answerC = $request->answerC;
+        $q->answerReasonA = $request->answerReasonA;
+        $q->answerReasonB = $request->answerReasonB;
+        $q->answerReasonC = $request->answerReasonC;
+        $q->feedbackcorAns = $request->feedbackcorAns;
+        $q->feedbackincorAns = $request->feedbackincorAns;
+        $q->feedbackcorReason = $request->feedbackcorReason;
+        $q->feedbackincorReason = $request->feedbackincorReason;
+        $q->trueans  = $request->trueans;
+        $q->trueansReason = $request->trueansReason;
+        if ($q->save()) {
+            return redirect('/admin/question/probs/'.$q->questionType)->with('success','Data Berhasil Diupdate');
+        }else{
+            return "error";
+        }
     }
 
     /**

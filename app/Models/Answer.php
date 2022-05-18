@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class Answer extends Model
 {
@@ -174,13 +175,29 @@ class Answer extends Model
         return $model;
     }
 
-    public function recapAnswer(array $ansSes, int $idKelas){
+    public function recapAnswer(array $ansSes, int $idKelas, int $isTeacher){
         $model = collect(array());
-        if ($idKelas == -1) {
-            $model = $this->queryAnswerRecapAll();
-            # code...
+        if ($isTeacher == 0) {
+            if ($idKelas == -1) {
+                $model = $this->queryAnswerRecapAll();
+                # code...
+            }else{
+                $model = $this->queryAnswerRecapCondition($idKelas);
+            }
         }else{
-            $model = $this->queryAnswerRecapCondition($idKelas);
+            $kelas = Kelas::where('schools_id','=',Auth::user()->schools_id)->get();
+            // $tmp= $answer->queryAnswerRecapAll();
+            // return $tmp;
+            if ($idKelas == -1) {
+                foreach ($kelas as $k) {
+                    # code...
+                    $tmp = $this->queryAnswerRecapCondition($k->id);
+                    $model = $model->concat($tmp);
+                }
+                # code...
+            }else{
+                $model = $this->queryAnswerRecapCondition($idKelas);
+            }
         }
         $data = $this->convertAnswerData($model);
         $recaps = array();

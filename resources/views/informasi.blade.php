@@ -1,5 +1,8 @@
 
 @extends('template')
+@section('title')
+    {{ "Sistem Informasi Evaluasi Pembelajaran" }}
+@endsection
 @section('usersection')
     <div class="row">
         <div class="container">

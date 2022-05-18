@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>@yield('title')</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
@@ -25,24 +25,21 @@
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="/admin">Dashboard</a>
+                <a class="navbar-brand" href="/admin">Sistem Penilaian Nilai Siswa</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="/admin">Home</a>
-                    </li>
-                
+                    @if (Auth::user()->role == 1)
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                           Data Pertanyaan
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <li><a class="dropdown-item" href="/admin/question/A">Pertanyaan Tipe A</a></li>
-                          <li><a class="dropdown-item" href="/admin/question/B">Pertanyaan Tipe B</a></li>
-                          <li><a class="dropdown-item" href="/admin/question/B">Buat Pertanyaan Baru</a></li>
+                          <li><a class="dropdown-item" href="/admin/question/probs/A">Pertanyaan Tipe A</a></li>
+                          <li><a class="dropdown-item" href="/admin/question/probs/B">Pertanyaan Tipe B</a></li>
+                          <li><a class="dropdown-item" href="/admin/question/create">Buat Pertanyaan Baru</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -54,8 +51,9 @@
                           <li><a class="dropdown-item" href="/admin/teacher">Guru</a></li>
                         </ul>
                     </li>
+                    @endif
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Rekap Data Evaluasi</a>
+                        <a class="nav-link" href="/admin/recap">Rekap Data Evaluasi</a>
                     </li>
                     </ul>
                     <span class="navbar-text">
@@ -153,21 +151,27 @@
             }
         }
         // get td elements
-        function getData(optionText){
+        function getData(optionText,isSelect){
             let tr = document.getElementsByClassName("row-datas");
             var pos;
-            if (optionText.options[optionText.selectedIndex].text == "") {
+            if (isSelect == 0) {
                 for (let index = 0; index < tr.length; index++) {
                     tr[index].style.display='';
                 }
             }else{
-                for (let index = 0; index < tr.length; index++) {
-                    if(optionText.options[optionText.selectedIndex].value == tr[index].children[2].dataset.class){
+                if (optionText.options[optionText.selectedIndex].text == "") {
+                    for (let index = 0; index < tr.length; index++) {
                         tr[index].style.display='';
-
-                    }else{
-                        tr[index].style.display='none';
-
+                    }
+                }else{
+                    for (let index = 0; index < tr.length; index++) {
+                        if(optionText.options[optionText.selectedIndex].value == tr[index].children[2].dataset.class){
+                            tr[index].style.display='';
+    
+                        }else{
+                            tr[index].style.display='none';
+    
+                        }
                     }
                 }
             }
@@ -214,10 +218,10 @@
           objXMLHttpRequest.onreadystatechange = function() {
             if(objXMLHttpRequest.readyState === 4) {
               if(objXMLHttpRequest.status === 200) {
-                  parseJsonForOption(objXMLHttpRequest.responseText);
+                    parseJsonForOption(objXMLHttpRequest.responseText);
               } else {
-                    alert('Error Code: ' +  objXMLHttpRequest.status);
-                    alert('Error Message: ' + objXMLHttpRequest.statusText);
+                    console.log('Error Code: ' +  objXMLHttpRequest.status);
+                    console.log('Error Message: ' + objXMLHttpRequest.statusText);
               }
             }
           }
@@ -247,10 +251,17 @@
             el.forEach(o => o.remove());
           }
         }
-        function exportData(){
+        function exportData(isTeacher){
             var el = document.getElementById("kelasList");
-            alert(el.value);
-            window.location.href='/admin/export/'+el.value;
+            // alert(el.value);
+            if (isTeacher == 0) {
+                // alert(0);
+                window.location.href='/admin/export/'+el.value+'/'+0;
+            }else{
+                // alert(1);
+                window.location.href='/admin/export/'+el.value+'/'+1;
+
+            }
         }
     </script>
 </html>

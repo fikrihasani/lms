@@ -1,4 +1,7 @@
 @extends('admin.template')
+@section('title')
+    {{ "Recap Data" }}
+@endsection
 @section('adminsection')
 <div class="container">
     <div style="padding: 10px 0px">
@@ -15,14 +18,14 @@
                 </div>
                 <div class="col-6">
                     <label for="kelasList">Pilih Kelas</label>
-                    <select name="kelasFilter" id="kelasList" class="form-control"  onchange="getData(this)" >
+                    <select name="kelasFilter" id="kelasList" class="form-control"  onchange="getData(this,1)" >
                         <option value=""></option>
                     </select>
                 </div>
             </div>
         </form>
         <div>
-            <button name="" id="" class="btn btn-secondary" href="#" role="button">Show All</button>
+            <button name="" id="" class="btn btn-info" href="#" role="button" onclick="getData(-1,0)">Show All</button>
         </div>
     </div>
     <div  style="overflow:auto" class="row">
@@ -91,7 +94,13 @@
         </table>
     </div>
     {{-- <a href="/admin/export"> --}}
-    <button type="button" class="btn btn-primary" onclick="exportData()">Download Excel</button>
+    <button type="button" class="btn btn-primary" onclick="exportData(
+        @if(Auth::user()->role == 1)
+        {{0}}
+        @else
+        {{1}}
+        @endif
+    )">Download Excel</button>
     {{-- </a> --}}
     
 </div>
