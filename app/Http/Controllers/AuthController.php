@@ -25,7 +25,9 @@ class AuthController extends Controller
         }
         return back()->with('loginError','Login Failed');
     }
-    public function logout(){
 
+    public function logout(){
+        Auth::logout();    
+        return redirect('/');
     }
 }

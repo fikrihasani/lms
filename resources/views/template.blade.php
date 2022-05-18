@@ -28,9 +28,15 @@
                   </li> --}}
                 </ul>
                 <span class="navbar-text">
+                    @if (Auth::check())
+                    <a class="nav-link" href="/logout">
+                      Logout
+                    </a>
+                    @else
                     <a class="nav-link" href="/login">
                         Login
                     </a>
+                    @endif
                 </span>
               </div>
             </div>

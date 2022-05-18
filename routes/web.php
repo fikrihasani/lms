@@ -48,4 +48,5 @@ Route::get('/register/admin',[RegisterController::class,'registerAdmin'])->name(
 Route::post('/register/store',[RegisterController::class,'store'])->name('register.store');
 Route::post('/register/admin/store',[RegisterController::class,'storeAdmin'])->name('register.admin.store');
 Route::post('/authenticate',[AuthController::class, 'authenticate'])->name('authenticate');
+Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 Route::get('/kelas/{school}',[AppController::class,'getKelas'])->name('getkelas');
