@@ -8,14 +8,21 @@
         </div>
     @endif
     @if ($qBCount == 11 && $qACount == 11)
-        <div class="alert alert-info" role="alert">
-            <strong>Semua Pertanyaan Sudah dibuat</strong>
-            <br>
-            <br>
-            <a name="" id="" class="btn btn-info" href="/admin/question/probs/A" role="button">Cek Pertanyaan Tipe A</a>
-            <a name="" id="" class="btn btn-info" href="/admin/question/probs/B" role="button">Cek Pertanyaan Tipe B</a>
+        <div class="container">
+            <div style="
+            text-align: center;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px;">
+                <h4>Semua Pertanyaan Sudah dibuat</h4>
+                <br>
+                <br>
+                <a name="" id="" class="btn btn-info" href="/admin/question/probs/A" role="button">Cek Pertanyaan Tipe A</a>
+                <a name="" id="" class="btn btn-info" href="/admin/question/probs/B" role="button">Cek Pertanyaan Tipe B</a>
+            </div>
         </div>
-        
     @else
         <div class="alert alert-info" role="alert">
             <h4>Untuk cara bagaimana membuat persamaan dengan latex</h4>

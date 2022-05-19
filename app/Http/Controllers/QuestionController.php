@@ -96,7 +96,7 @@ class QuestionController extends Controller
     {
         //
         $question = Question::where('questionType','=',$questionType)->get();
-        return view('admin.questions.probs',['question'=>$question]);
+        return view('admin.questions.probs',['question'=>$question,'questionType'=>$questionType]);
     }
 
     public function show($id)
