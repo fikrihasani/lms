@@ -43,7 +43,7 @@
                   @foreach ($data as $q)
                   {{-- <input type="hidden" name="{{'questions_id'.$loop->iteration + $data->firstItem() - 1}}" value="{{$q->id}}"> --}}
                   <input type="hidden" name="{{'questions_id'.$i}}" value="{{$q->id}}">
-                    <div id="{{'problemAns'.$i}}">
+                    <div id="{{'problemAns'.$i}}" style="margin-bottom: 30px">
                         <p><b>Soal no: {{ $i }}</b></p>
                         <p>{!! $q->narration !!}</p>
                         <div class="form-check">
@@ -95,13 +95,10 @@
                         </div>
                         @endfor
                     </div>
-                    <br>
                     @php
                         $i++;
                     @endphp
                     @endforeach
-                    {{-- {{ $data->links() }} --}}
-                    <hr>
                     <nav aria-label="Page navigation problem">
                       <ul class="pagination justify-content-center"">
                           @for ($i = 1; $i <= 11; $i++)

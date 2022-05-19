@@ -69,8 +69,8 @@
               if(objXMLHttpRequest.status === 200) {
                   parseJsonForOption(objXMLHttpRequest.responseText);
               } else {
-                    alert('Error Code: ' +  objXMLHttpRequest.status);
-                    alert('Error Message: ' + objXMLHttpRequest.statusText);
+                    console.log('Error Code: ' +  objXMLHttpRequest.status);
+                    console.log('Error Message: ' + objXMLHttpRequest.statusText);
               }
             }
           }

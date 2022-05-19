@@ -33,9 +33,7 @@ class AppController extends Controller
         }else {
             $qType = 'B';
         }
-        $qType = 'A';
-
-        $data = Question::where("questionType",$qType)->get();
+        $data = Question::where("questionType",$qType)->get()->shuffle();
         $schools = School::all();
         if (count($data) == 0) {
             return "empty data";
