@@ -5,7 +5,7 @@
 @endsection
 @section('usersection')
         <div class="container">
-          @if (count($data))
+          @if (count($data) == 0)
           <div style="
           text-align: center;
           position: absolute;
