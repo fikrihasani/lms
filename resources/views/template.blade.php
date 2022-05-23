@@ -102,7 +102,7 @@
           }
         }
         // toggle div answers
-        function toggleDivAns(id,pagingId){
+        function toggleDivAns(id,pagingId,type){
                 var totalNumberOfproblems = 11;
                 for(var i=1; i<=totalNumberOfproblems; i++){
                     if (document.getElementById('problemAns'+i)) {
@@ -113,13 +113,15 @@
                     document.getElementById('problemAns'+id).style.display='block';
                 }
                 // clear all class active
-                for(var i=1; i<=totalNumberOfproblems; i++){
-                    var el = document.getElementById('pageProbAns'+i);
-                    el.classList.remove('active');
+                if (type == 'pagination') {
+                  for(var i=1; i<=totalNumberOfproblems; i++){
+                      var el = document.getElementById('pageProbAns'+i);
+                      el.classList.remove('active');
+                  }
+                  // add active to clicked 
+                  var element = document.getElementById(pagingId);
+                  element.classList.add("active");
                 }
-                // add active to clicked 
-                var element = document.getElementById(pagingId);
-                element.classList.add("active");
         }
         // function toggle div result
         function toggleResAns(id,pagingId){

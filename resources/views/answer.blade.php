@@ -53,6 +53,13 @@
                 @php
                 $i = 1;                    
                 @endphp
+                <div style="float:right">
+                  <ul class="pagination justify-content-center">
+                      @for ($j = 1; $j <= 11; $j++)
+                          <li class="page-item @if($j==1) active @endif"  onclick="toggleDivAns({{$j}},this.id,'pagination')" id="pageProbAns{{$j}}"><a class="page-link"> {{$j}}</a></li>
+                      @endfor
+                  </ul>
+                </div>
                 @foreach ($data as $q)
                 {{-- <input type="hidden" name="{{'questions_id'.$loop->iteration + $data->firstItem() - 1}}" value="{{$q->id}}"> --}}
                 <input type="hidden" name="{{'questions_id'.$i}}" value="{{$q->id}}">
@@ -107,21 +114,31 @@
                         <label class="form-check-label">{{$j}}</label>
                       </div>
                       @endfor
+                      <div style="float:right">
+                        @if ($i != 1)
+                        <button class="btn btn-primary" type="button" onclick="toggleDivAns({{$i-1}},this.id,'pagination')" id="pageProbAns{{$i-1}}">Soal Sebelumnya</button>
+                        @endif
+                        @if ($i == 11)
+                        <button type="submit" class="btn btn-success">Kumpulkan Jawaban</button>
+                        @else
+                        <button class="btn btn-primary" type="button" onclick="toggleDivAns({{$i+1}},this.id,'pagination')" id="pageProbAns{{$i+1}}">Soal Selanjutnya</button>
+                        @endif
+                      </div>
                   </div>
                   @php
                       $i++;
                   @endphp
                   @endforeach
-                  <nav aria-label="Page navigation problem">
-                    <ul class="pagination justify-content-center"">
-                        @for ($i = 1; $i <= 11; $i++)
-                            <li class="page-item"  onclick="toggleDivAns({{$i}},this.id)" id="pageProbAns{{$i}}"><a class="page-link">{{$i}}</a></li>
+                  {{-- <div style="float:right">
+                    <ul class="pagination justify-content-center">
+                        @for ($j = 1; $j <= 11; $j++)
+                            <li class="page-item"  onclick="toggleDivAns({{$j}},this.id,'pagination')" id="pageProbAns{{$j}}"><a class="page-link"> Soal {{$j}}</a></li>
                         @endfor
                     </ul>
-                  </nav>
+                  </div>
                   <center>
                     <button type="submit" class="btn btn-primary">Kumpulkan Jawaban</button>
-                  </center>
+                  </center> --}}
               </form>
             </div>
           @endif
