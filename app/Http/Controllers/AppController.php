@@ -35,11 +35,7 @@ class AppController extends Controller
         }
         $data = Question::where("questionType",$qType)->get()->shuffle();
         $schools = School::all();
-        if (count($data) == 0) {
-            return "empty data";
-        }else{
-            return view("answer",['data'=>$data,'schools'=>$schools]);
-        }
+        return view("answer",['data'=>$data,'schools'=>$schools]);
     }
 
     public function result($id){

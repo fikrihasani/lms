@@ -30,14 +30,19 @@
         </div>
         
         <div class="container" style="padding:20px">
-            <h2>Pertanyaan Soal Tipe A</h2>
+            <h2>Pertanyaan Soal</h2>
             <form action="{{route('question.store')}}" method="post" id="Form1">
                 @csrf
                 <select name="questionType" id="">
                     @if ($qBCount == 11)
                     <option value="A">Tipe Pertanyaan A</option>
                     @else
-                    <option value="B">Tipe Pertanyaan B</option>
+                        @if ($qAcount == 11 )
+                        <option value="B">Tipe Pertanyaan B</option>
+                        @else
+                        <option value="A">Tipe Pertanyaan A</option>
+                        <option value="B">Tipe Pertanyaan B</option>
+                        @endif
                     @endif
                 </select>
                 @for ($i = 1; $i <= 11; $i++)

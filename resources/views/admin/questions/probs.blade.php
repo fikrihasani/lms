@@ -11,6 +11,13 @@
 @endif
     <div class="container" style="padding-top: 10px">
         <h2>Soal-soal pertanyaan tipe {{$questionType}}</h2>
+        @if (count($question) == 0)
+            <div class="alert alert-primary|secondary|success|danger|warning|info|light|dark" role="alert">
+                <strong>Belum ada Soal. Silahkan Buat Soal</strong>
+                <a name="" id="" class="btn btn-info" href="/admin/question/create" role="button">Buat Soal</a>
+            </div>
+            
+        @endif
         <div style="padding-top: 20px; padding-bottom: 20px">
             @php
             $i = 1;
