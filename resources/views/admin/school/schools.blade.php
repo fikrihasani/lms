@@ -20,21 +20,20 @@
                 <button class="btn btn-info" onclick="addKelasElement()" type="button">Tambah kelas</button>
             </div>
         </form>
-
     </div>
     @php
         $i = 1;
     @endphp
     @if ($data)
     <table class="table table-striped">
-        <th>
+        <thead>
             <tr>
                 <td>No</td>
                 <td>Nama Sekolah</td>
                 <td>Kelas</td>
                 <td>Aksi</td>
             </tr>
-        </th>
+        </thead>
         <tbody>
             @foreach ($model as $school)
             <tr>
@@ -42,12 +41,13 @@
                 <td>{{$school->name}}</td>
                 <td>
                     @foreach ($school->kelas as $kelas)
-                        <a href="#" style="margin:2px">
                             {{$kelas->name}}
-                        </a>
                     @endforeach
                 </td>
-                <td><a href=""><button class="btn btn-info">See</button></a></td>
+                <td>
+                    <a href="/admin/school/{{$school->id}}"><button class="btn btn-info">See</button></a>
+                    <a href="/admin/school/{{$school->id}}/edit"><button class="btn btn-primary">Edit</button></a>
+                </td>
             </tr>
             @endforeach
         </tbody>

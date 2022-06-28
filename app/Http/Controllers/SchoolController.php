@@ -17,7 +17,7 @@ class SchoolController extends Controller
             # code...
               $data = True;
         }
-        return view('admin.schools',['data'=>$data,'model'=>$modelSchool]);
+        return view('admin.school.schools',['data'=>$data,'model'=>$modelSchool]);
     }
 
     public function store(Request $request){
@@ -34,5 +34,16 @@ class SchoolController extends Controller
             $kelas->save();
         }
         return redirect(route('admin.school.index'));
+    }
+
+    public function edit($id){
+        $school = School::find($id)->kelas();
+        return dd($school);
+        return view('admin.school.edit',['school'=>$school]);
+    }
+
+    public function show($id){
+        $school = School::find($id);
+        return view('admin.school.show',['school'=>$school]);
     }
 }

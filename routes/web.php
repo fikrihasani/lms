@@ -8,6 +8,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CkeditorController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SchoolController;
+use App\Models\School;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,6 +41,8 @@ Route::prefix('/admin')->group(function(){
     Route::get('/export/{idKelas}/{isTeacher}', [AdminController::class, 'export']);
     Route::get('/school',[SchoolController::class,'index'])->name('admin.school.index');
     Route::post('/school/store',[SchoolController::class,'store'])->name('admin.school.store');
+    Route::get('/school/{id}',[SchoolController::class,'show']);
+    Route::get('/school/{id}/edit',[SchoolController::class,'edit']);
 });
 Route::post('/ckeditor/upload',[CkeditorController::class,'upload'])->name('ckeditor.image-upload');
 Route::get('/login',[AuthController::class,'login'])->name('login');
