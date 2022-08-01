@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Kelas;
 use App\Models\School;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SchoolController extends Controller
@@ -42,8 +43,9 @@ class SchoolController extends Controller
         return view('admin.school.edit',['school'=>$school]);
     }
 
-    public function show($id){
+    public function info($id){
         $school = School::find($id);
-        return view('admin.school.show',['school'=>$school]);
+        // $teachers = User::where('role',0)->where('schools_id',$id)->get();
+        return view('admin.school.info',['school'=>$school]);
     }
 }

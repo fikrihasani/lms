@@ -6,6 +6,8 @@
 <div id="detailNomer" class="container">
     <h3>Nama Sekolah: {{$school->name}}</h3>
     <button class="btn btn-primary">Edit</button>
+    <button class="btn btn-primary">Tambah Guru</button>
+    <button class="btn btn-primary">Tambah Kelas</button>
     @php
         $i = 1;
     @endphp
@@ -25,6 +27,8 @@
                     <td>
                         <button type="button" class="btn btn-info" onclick="window.location.href='/admin/kelas/{{$kelas->id}}'">Show</button>
                         <button type="button" class="btn btn-info" onclick="window.location.href='/admin/kelas/{{$kelas->id}}/edit'">Edit</button>
+                        <button type="button" class="btn btn-warning" onclick="window.location.href='/admin/kelas/{{$kelas->id}}/edit'">Delete</button>
+                    
                     </td>
                 </tr>
             @php
@@ -35,7 +39,7 @@
     </table>
     @php
         $i = 1;
-    @endphp
+    @endphp     
     <table class="table table-striped">
         <thead>
             <tr>
@@ -54,6 +58,7 @@
                     <td>
                         <button type="button" class="btn btn-info" onclick="window.location.href='/admin/teacher/{{$kelas->id}}'">Show</button>
                         <button type="button" class="btn btn-info" onclick="window.location.href='/admin/teacher/{{$kelas->id}}/edit'">Edit</button>
+                        <button type="button" class="btn btn-warning" onclick="window.location.href='/admin/teacher/{{$kelas->id}}/edit'">Edit</button>
                     </td>
                 </tr>
             @php

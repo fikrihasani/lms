@@ -33,6 +33,8 @@ class AdminController extends Controller
             $schools = School::all();
             $ansDat = $answer->recapAnswer($ansSes,-1,0);
             return view('admin.recapAns',["answer"=>$ansDat, 'schools'=>$schools]);
+        }else{
+            
         }
         $schools = School::where('id','=',Auth::user()->schools_id)->get();
         // return $schools;

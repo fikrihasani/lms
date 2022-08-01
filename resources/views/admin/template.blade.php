@@ -48,7 +48,7 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                           <li><a class="dropdown-item" href="/admin/school">Sekolah</a></li>
-                          <li><a class="dropdown-item" href="/admin/teacher">Guru</a></li>
+                          <li><a class="dropdown-item" href="/admin/users">Guru</a></li>
                         </ul>
                     </li>
                     @endif

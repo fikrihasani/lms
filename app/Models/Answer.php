@@ -75,6 +75,7 @@ class Answer extends Model
                 $tmp["kelas_id"] = $dataCollection[$i]["kelas_id"];
                 $tmp["sekolah"] = $dataCollection[$i]["sekolah"];
                 $tmp["answer_sessions_id"] = $dataCollection[$i]["answer_sessions_id"];
+                $tmp['questionType'] = $dataCollection[$i]['questionType'];
                 while ($i < $totalData && $dataCollection[$i]["answer_sessions_id"] == $answerSessionId){
                     # code...
                     $tmp["soal_".$prob] = $dataCollection[$i]["soal"];
@@ -146,6 +147,7 @@ class Answer extends Model
             $tmp["keyakinan"] = ($ans->degreeBelieve <= 2) ? "Tidak Yakin" : "Yakin";
             $tmp["kategori"] = $this->getCategory($tmp["soal"],$tmp["alasan"],$tmp["keyakinan"]);
             $tmp["skor"] = $this->skorThreeTier($tmp["soal"],$tmp["alasan"],$tmp["keyakinan"]);
+            $tmp['questionType'] = $ans->questionType;
             array_push($data,$tmp);
             $i++;
         }
@@ -158,7 +160,7 @@ class Answer extends Model
         ->join('kelas','answers.kelas_id','=','kelas.id')
         ->join('schools','kelas.schools_id','=','schools.id')
         ->join('answer_sessions','answers.answer_sessions_id','=','answer_sessions.id')
-        ->select('answers.*','questions.trueAns','questions.trueAnsReason','kelas.name as nama_kelas','schools.name as nama_sekolah','answer_sessions.created_at')
+        ->select('answers.*','questions.trueAns','questions.trueAnsReason','questions.questionType','kelas.name as nama_kelas','schools.name as nama_sekolah','answer_sessions.created_at')
         ->get();
         return $model;
     }
@@ -169,7 +171,7 @@ class Answer extends Model
         ->join('kelas','answers.kelas_id','=','kelas.id')
         ->join('schools','kelas.schools_id','=','schools.id')
         ->join('answer_sessions','answers.answer_sessions_id','=','answer_sessions.id')
-        ->select('answers.*','questions.trueAns','questions.trueAnsReason','kelas.name as nama_kelas','schools.name as nama_sekolah','answer_sessions.created_at')
+        ->select('answers.*','questions.trueAns','questions.trueAnsReason','questions.questionType','kelas.name as nama_kelas','schools.name as nama_sekolah','answer_sessions.created_at')
         ->where('answers.kelas_id','=',$kelasId)
         ->get();
         return $model;

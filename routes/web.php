@@ -6,9 +6,12 @@ use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CkeditorController;
+use App\Http\Controllers\KelasController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SchoolController;
+use App\Http\Controllers\UserController;
 use App\Models\School;
+use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 
@@ -41,8 +44,13 @@ Route::prefix('/admin')->group(function(){
     Route::get('/export/{idKelas}/{isTeacher}', [AdminController::class, 'export']);
     Route::get('/school',[SchoolController::class,'index'])->name('admin.school.index');
     Route::post('/school/store',[SchoolController::class,'store'])->name('admin.school.store');
-    Route::get('/school/{id}',[SchoolController::class,'show']);
+    Route::get('/school/{id}',[SchoolController::class,'info']);
     Route::get('/school/{id}/edit',[SchoolController::class,'edit']);
+    Route::get('/kelas',[KelasController::class,'index']);
+    Route::get('/kelas/{id}',[KelasController::class,'info']);
+    Route::get('/users',[UserController::class,'index']);
+    Route::get('/users/{id}',[UserController::class,'show']);
+    Route::get('/users/{id}/edit',[UserController::class,'show']);
 });
 Route::post('/ckeditor/upload',[CkeditorController::class,'upload'])->name('ckeditor.image-upload');
 Route::get('/login',[AuthController::class,'login'])->name('login');
