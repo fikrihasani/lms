@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kelas;
+use App\Models\School;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -24,14 +26,17 @@ class UserController extends Controller
 
     public function edit($id){
         $user = User::find($id);
-        return view('admin.user.index',['user'=>$user]);
+        return view('admin.users.edit',['user'=>$user]);
     }
 
-    public function add(){
-        return view('admin.user.add');
+    public function add($idSekolah){
+        $school = School::find($idSekolah);
+        $kelas = Kelas::where('schools_id',$idSekolah)->get();
+        return view('admin.users.add',['schools'=>$school,'kelas'=>$kelas]);
     }
 
     public function store(Request $request){
+        return dd($request);
         $request->validate([
             'name'=>'required|max:255',
             'email'=>'required|email:dns',
@@ -48,8 +53,7 @@ class UserController extends Controller
         $user->role = 0;
         $user->schools_id  = $request->school;
         $user->save();
-        //     # code...
-        // $request->session()->flash('success','Pendaftaran akun berhasil. Silahkan login');
+
         return redirect('/admin/user/'.$user->id)->with('success','Pendaftaran akun berhasil. Silahkan login');
     }
 
@@ -61,6 +65,8 @@ class UserController extends Controller
         $user->email = $request->email;
         $user->role = 0;
         $user->schools_id  = $request->school;
+
+
         $user->save();
     }
 }

@@ -48,9 +48,14 @@ Route::prefix('/admin')->group(function(){
     Route::get('/school/{id}/edit',[SchoolController::class,'edit']);
     Route::get('/kelas',[KelasController::class,'index']);
     Route::get('/kelas/{id}',[KelasController::class,'info']);
+    Route::delete('/kelas/delete/{id}',[KelasController::class,'removeTeacher']);
+    Route::delete('/kelas/{id}',[KelasController::class,'destroy']);
+    Route::post('/kelas/addTeacher',[KelasController::class,'addTeacher'])->name('admin.kelas.addTeacher');
     Route::get('/users',[UserController::class,'index']);
     Route::get('/users/{id}',[UserController::class,'show']);
+    Route::get('/users/add/{idSekolah}',[UserController::class,'add']);
     Route::get('/users/{id}/edit',[UserController::class,'show']);
+    Route::post('/users/store',[UserController::class,'store'])->name('admin.user.store');
 });
 Route::post('/ckeditor/upload',[CkeditorController::class,'upload'])->name('ckeditor.image-upload');
 Route::get('/login',[AuthController::class,'login'])->name('login');

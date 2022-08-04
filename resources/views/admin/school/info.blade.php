@@ -6,8 +6,8 @@
 <div id="detailNomer" class="container">
     <h3>Nama Sekolah: {{$school->name}}</h3>
     <button class="btn btn-primary">Edit</button>
-    <button class="btn btn-primary">Tambah Guru</button>
-    <button class="btn btn-primary">Tambah Kelas</button>
+    <a href="/admin/users/add/{{$school->id}}"><button class="btn btn-primary">Tambah Guru</button></a>
+    <a href=""><button class="btn btn-primary">Tambah Kelas</button></a>
     @php
         $i = 1;
     @endphp
@@ -58,7 +58,7 @@
                     <td>
                         <button type="button" class="btn btn-info" onclick="window.location.href='/admin/teacher/{{$kelas->id}}'">Show</button>
                         <button type="button" class="btn btn-info" onclick="window.location.href='/admin/teacher/{{$kelas->id}}/edit'">Edit</button>
-                        <button type="button" class="btn btn-warning" onclick="window.location.href='/admin/teacher/{{$kelas->id}}/edit'">Edit</button>
+                        <button type="button" class="btn btn-warning" onclick="window.location.href='/admin/teacher/{{$kelas->id}}/edit'">Delete</button>
                     </td>
                 </tr>
             @php

@@ -9,6 +9,8 @@ use App\Models\AnswerSession;
 use Prophecy\Doubler\Generator\Node\ReturnTypeNode;
 use App\Http\Controllers\AdminController;
 use App\Models\Question;
+use App\Models\Teaching;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
 class KelasController extends Controller
@@ -17,12 +19,31 @@ class KelasController extends Controller
     public function index(){
         return view('admin.kelas.index',['kelas'=>Kelas::all()]);
     }
+    
+    public function destroy($id){
+        $deleted = Teaching::where('kelas_id',$id)->delete();
+        $answer = Answer::where('kelas_id',$id)->groupBy('answer_sessions_id')->get();
+        $ls = array();
+        foreach ($answer as $ans) {
+            array_push($ls,$ans->answer_sessions_id);
+        }
+        $answer = Answer::whereIn('answer_sessions_id',$ls)->delete();
+        $answerSession = AnswerSession::whereIn('id',$ls)->delete();
+        $kelas = Kelas::find($id)->delete();
+        return back();
+    }
 
     public function info($id){
-        $data = DB::table('kelas')->select('kelas.*','users.name as nama_guru','users.id as id_guru','schools.name as nama_sekolah')->join('users','kelas.users_id','=','users.id')->join('schools','kelas.schools_id','=','schools.id')->where('kelas.id',$id)->get();
-        $kelas = $data->first();
+        $data = DB::table('teachings')->select('kelas.*','users.name as nama_guru','users.id as id_guru','schools.name as nama_sekolah')->join('kelas','kelas.id','=','teachings.kelas_id')->join('users','users.id','=','teachings.users_id')->join('schools','kelas.schools_id','=','schools.id')->where('teachings.kelas_id',$id)->get();
+        $ls = array();
+        foreach ($data as $d) {
+            # code...
+            array_push($ls,$d->id_guru);
+        }
+        $kelas = Kelas::find($id);
+        $teacher = User::where('role',0)->whereNotIn('id',$ls)->get();
         $dataSiswa =  $this->groupByKelas($id);
-        return view('admin.kelas.info',['kelas'=>$kelas,'data'=>$data,'dataSiswa'=>$dataSiswa]);
+        return view('admin.kelas.info',['kelas'=>$kelas,'data'=>$data,'dataSiswa'=>$dataSiswa,'teacher'=>$teacher]);
     }
 
     public function groupByKelas($idKelas){
@@ -66,13 +87,17 @@ class KelasController extends Controller
         return $finDat;
     }
 
-    private function convert($data){
-        $tmp = array();
-        foreach ($data as $value) {
-            # code...
-            print($value->questions_id."<br>");
-        }
-        return collect($tmp);
+    public function addTeacher(Request $request){
+        $teaching = new Teaching();
+        $teaching->kelas_id = $request->kelas_id;
+        $teaching->users_id = $request->users_id;
+        $teaching->save();
+        return redirect('/admin/kelas/'.$request->kelas_id);
+    }
+
+    public function removeTeacher($id){
+        $deleted = Teaching::where('users_id',$id)->delete();
+        return back();
     }
 
     public function delete($id){
