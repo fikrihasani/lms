@@ -46,6 +46,7 @@ Route::prefix('/admin')->group(function(){
     Route::post('/school/store',[SchoolController::class,'store'])->name('admin.school.store');
     Route::get('/school/{id}',[SchoolController::class,'info']);
     Route::get('/school/{id}/edit',[SchoolController::class,'edit']);
+    Route::post('/school/addKelas/{id}',[SchoolController::class,'addKelas']);
     Route::get('/kelas',[KelasController::class,'index']);
     Route::get('/kelas/{id}',[KelasController::class,'info']);
     Route::delete('/kelas/delete/{id}',[KelasController::class,'removeTeacher']);

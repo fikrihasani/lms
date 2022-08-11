@@ -7,7 +7,14 @@
     <h3>Nama Sekolah: {{$school->name}}</h3>
     <button class="btn btn-primary">Edit</button>
     <a href="/admin/users/add/{{$school->id}}"><button class="btn btn-primary">Tambah Guru</button></a>
-    <a href=""><button class="btn btn-primary">Tambah Kelas</button></a>
+    <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#formAddKelas" aria-expanded="false" aria-controls="formAddKelas">Tambah Kelas</button>
+    <div class="collapse" id="formAddKelas" style="margin-top: 20px; margin-bottom: 20px">
+        <form action="/admin/school/addKelas/{{$school->id}}" method="post">
+            @csrf
+            <input type="text" name="kelasName" class="form-control"><br>
+            <button type="submit" class="btn btn-success">Tambah</button>
+        </form>
+    </div>
     @php
         $i = 1;
     @endphp
@@ -27,8 +34,11 @@
                     <td>
                         <button type="button" class="btn btn-info" onclick="window.location.href='/admin/kelas/{{$kelas->id}}'">Show</button>
                         <button type="button" class="btn btn-info" onclick="window.location.href='/admin/kelas/{{$kelas->id}}/edit'">Edit</button>
-                        <button type="button" class="btn btn-warning" onclick="window.location.href='/admin/kelas/{{$kelas->id}}/edit'">Delete</button>
-                    
+                        {{-- <form action="/admin/kelas/{{$kelas->id}}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        <form> --}}
                     </td>
                 </tr>
             @php
@@ -56,9 +66,7 @@
                     <td>{{$guru->name}}</td>
                     <td>{{$guru->email}}</td>
                     <td>
-                        <button type="button" class="btn btn-info" onclick="window.location.href='/admin/teacher/{{$kelas->id}}'">Show</button>
-                        <button type="button" class="btn btn-info" onclick="window.location.href='/admin/teacher/{{$kelas->id}}/edit'">Edit</button>
-                        <button type="button" class="btn btn-warning" onclick="window.location.href='/admin/teacher/{{$kelas->id}}/edit'">Delete</button>
+                        <button type="button" class="btn btn-info" onclick="window.location.href='/admin/users/{{$guru->id}}'">Show</button>
                     </td>
                 </tr>
             @php

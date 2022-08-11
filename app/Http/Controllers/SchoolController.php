@@ -6,6 +6,7 @@ use App\Models\Kelas;
 use App\Models\School;
 use App\Models\User;
 use Illuminate\Http\Request;
+use PDO;
 
 class SchoolController extends Controller
 {
@@ -47,5 +48,13 @@ class SchoolController extends Controller
         $school = School::find($id);
         // $teachers = User::where('role',0)->where('schools_id',$id)->get();
         return view('admin.school.info',['school'=>$school]);
+    }
+
+    public function addKelas(Request $request, $id){
+        $kelas = new Kelas();
+        $kelas->name = $request->kelasName;
+        $kelas->schools_id = $id;
+        $kelas->save();
+        return back();
     }
 }

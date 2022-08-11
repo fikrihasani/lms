@@ -10,7 +10,7 @@
     <div>
         <h2>Data Guru</h2>
         <div style="margin: 20px 0px">
-            <button class="btn btn-primary" data-toggle="collapse" data-target="#formAddTeacher" aria-expanded="false" aria-controls="formAddTeacher">Tambah Guru</button>
+            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#formAddTeacher" aria-expanded="false" aria-controls="formAddTeacher">Tambah Guru</button>
          </div>
         <table class="table">
             <thead>
@@ -32,7 +32,7 @@
                             <button type="button" class="btn btn-primary">View</button>
                         </td>
                         <td>
-                            <form action="/admin/kelas/delete/{{$u->id}}" method="POST">
+                            <form action="/admin/kelas/delete/{{$u->id_guru}}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Remove</button>
@@ -49,7 +49,7 @@
     </div>
     @else
     <div style="margin: 20px 0px">
-       <button class="btn btn-primary" data-toggle="collapse" data-target="#formAddTeacher" aria-expanded="false" aria-controls="formAddTeacher">Tambah Guru</button>
+        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#formAddTeacher" aria-expanded="false" aria-controls="formAddTeacher">Tambah Guru</button>
     </div>
     @endif
     <div class="collapse" id="formAddTeacher" style="margin-top: 20px; margin-bottom: 20px">
@@ -67,6 +67,9 @@
     @endif
     
     <div>
+        @if (is_null($dataSiswa))
+        <center><h1>Data Kosong</h1></center>
+        @else
         <h2>Data Jawaban</h2>
         @php
             $i = 1;
@@ -95,6 +98,7 @@
                 @endforeach
             </tbody>
         </table>
+        @endif
     </div>
 
     

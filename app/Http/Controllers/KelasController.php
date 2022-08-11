@@ -29,6 +29,7 @@ class KelasController extends Controller
         }
         $answer = Answer::whereIn('answer_sessions_id',$ls)->delete();
         $answerSession = AnswerSession::whereIn('id',$ls)->delete();
+        return $id;
         $kelas = Kelas::find($id)->delete();
         return back();
     }
@@ -41,7 +42,8 @@ class KelasController extends Controller
             array_push($ls,$d->id_guru);
         }
         $kelas = Kelas::find($id);
-        $teacher = User::where('role',0)->whereNotIn('id',$ls)->get();
+        $teacher = DB::table('users')->select('*')->join('schools','schools.id','=','users.schools_id')->join('kelas','kelas.schools_id','=','schools.id')->where('users.role',0)->whereNotIn('users.id',$ls)->get();
+        // $teacher = User::where('role',0)->whereNotIn('id',$ls)->where()->get();
         $dataSiswa =  $this->groupByKelas($id);
         return view('admin.kelas.info',['kelas'=>$kelas,'data'=>$data,'dataSiswa'=>$dataSiswa,'teacher'=>$teacher]);
     }
@@ -50,6 +52,9 @@ class KelasController extends Controller
         $answer = new Answer();
         // rekap all 
         $model = $answer->queryAnswerRecapCondition($idKelas);
+        if ($model->isEmpty()){
+            return NULL;
+        }
         // get unique answer session data and convert to array
         $ansSes = AnswerSession::all()->toArray();
         // get answer data using answer session, all the formatting and calculation are being done  by answer class via recap answer method
@@ -96,6 +101,7 @@ class KelasController extends Controller
     }
 
     public function removeTeacher($id){
+        // return $id;
         $deleted = Teaching::where('users_id',$id)->delete();
         return back();
     }
