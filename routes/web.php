@@ -54,7 +54,8 @@ Route::prefix('/admin')->group(function(){
     Route::get('/users',[UserController::class,'index']);
     Route::get('/users/{id}',[UserController::class,'show']);
     Route::get('/users/add/{idSekolah}',[UserController::class,'add']);
-    Route::get('/users/{id}/edit',[UserController::class,'show']);
+    Route::get('/users/{id}/edit',[UserController::class,'edit']);
+    Route::put('/users/{id}',[UserController::class,'update'])->name('admin.user.update');
     Route::post('/users/store',[UserController::class,'store'])->name('admin.user.store');
 });
 Route::post('/ckeditor/upload',[CkeditorController::class,'upload'])->name('ckeditor.image-upload');
