@@ -18,3 +18,11 @@
             </div>
         </div>
 @endsection
+{{-- custom css cuma untuk halaman ini --}}
+@section('css')
+
+@endsection
+{{-- custom js cuma untuk halaman ini --}}
+@section('js')
+    <script></script>
+@endsection

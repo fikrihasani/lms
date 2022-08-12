@@ -14,4 +14,8 @@ class Kelas extends Model
     public function school(){
         return $this->belongsTo(School::class,'schools_id');
     }
+
+    public function answer(){
+        return $this->hasMany(Answer::class);
+    }
 }

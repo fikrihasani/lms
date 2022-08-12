@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::table('answers', function (Blueprint $table) {
             //
-            $table->foreignId('schools_id')->constrained();
-            $table->foreignId('kelas_id')->constrained();
+            $table->foreignId('schools_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('kelas_id')->constrained()->cascadeOnDelete();
         });
     }
 

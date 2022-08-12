@@ -54,7 +54,7 @@ class Answer extends Model
             # code...
             return  "Kurang paham konsep";
         }
-        
+
     }
 
     private function convertToRecap(int $answerSessionId,array $dataCollection) : array{
@@ -213,7 +213,11 @@ class Answer extends Model
             if (count($check[0])>0) {
                 array_push($recaps,$check[0]);
             }
-        } 
+        }
         return $recaps;
+    }
+
+    public function kelas(){
+        return $this->belongsTo(Kelas::class);
     }
 }

@@ -19,18 +19,19 @@ class KelasController extends Controller
     public function index(){
         return view('admin.kelas.index',['kelas'=>Kelas::all()]);
     }
-    
-    public function destroy($id){
-        $deleted = Teaching::where('kelas_id',$id)->delete();
-        $answer = Answer::where('kelas_id',$id)->groupBy('answer_sessions_id')->get();
-        $ls = array();
-        foreach ($answer as $ans) {
-            array_push($ls,$ans->answer_sessions_id);
-        }
-        $answer = Answer::whereIn('answer_sessions_id',$ls)->delete();
-        $answerSession = AnswerSession::whereIn('id',$ls)->delete();
-        return $id;
-        $kelas = Kelas::find($id)->delete();
+
+    public function destroy(Kelas $kela){
+        // $deleted = Teaching::where('kelas_id',$id)->delete();
+        // $answer = Answer::where('kelas_id',$id)->groupBy('answer_sessions_id')->get();
+        // $ls = array();
+        // foreach ($answer as $ans) {
+        //     array_push($ls,$ans->answer_sessions_id);
+        // }
+        // $answer = Answer::whereIn('answer_sessions_id',$ls)->delete();
+        // $answerSession = AnswerSession::whereIn('id',$ls)->delete();
+        // return $id;
+        //Cuma delete kelas kalau mau ditambah cek bisa di atas
+        $kela->delete();
         return back();
     }
 
@@ -50,7 +51,7 @@ class KelasController extends Controller
 
     public function groupByKelas($idKelas){
         $answer = new Answer();
-        // rekap all 
+        // rekap all
         $model = $answer->queryAnswerRecapCondition($idKelas);
         if ($model->isEmpty()){
             return NULL;
@@ -61,13 +62,13 @@ class KelasController extends Controller
         // facade pattern
         // echo $this->idKelas;
         $ansDat = $answer->recapAnswer($ansSes,$idKelas,1);
-        
+
         $finDat = array();
-        for ($i=1; $i <=11 ; $i++) { 
+        for ($i=1; $i <=11 ; $i++) {
             # code...
             $finDat[$i] = array('A'=>array(),'B'=>array());
                 # code...
-                for ($j=ord('A'); $j <= ord('B') ; $j++) { 
+                for ($j=ord('A'); $j <= ord('B') ; $j++) {
                     # code...
                     $finDat[$i][chr($j)]["Paham Konsep"] = array();
                     $finDat[$i][chr($j)]["Miskonsepsi (False Positive)"] = array();
@@ -84,7 +85,7 @@ class KelasController extends Controller
             }else{
                 $questionType = 'B';
             }
-            for ($i=1; $i<=11 ; $i++) { 
+            for ($i=1; $i<=11 ; $i++) {
                 # code...
                 array_push($finDat[$i][$questionType][$x['kategori_'.$i]],$x['nama_lengkap']);
             }
@@ -107,6 +108,6 @@ class KelasController extends Controller
     }
 
     public function delete($id){
-        
+
     }
 }

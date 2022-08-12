@@ -32,13 +32,13 @@
                     <td>{{$i}}</td>
                     <td>{{$kelas->name}}</td>
                     <td>
-                        <button type="button" class="btn btn-info" onclick="window.location.href='/admin/kelas/{{$kelas->id}}'">Show</button>
-                        <button type="button" class="btn btn-info" onclick="window.location.href='/admin/kelas/{{$kelas->id}}/edit'">Edit</button>
-                        {{-- <form action="/admin/kelas/{{$kelas->id}}" method="POST">
+                        <form action="{{route('admin.kelas.delete', $kelas->id)}}" method="POST">
+                            <a class="btn btn-info" href="{{route('admin.kelas.info', $kelas->id)}}">Show</a>
+                            <a class="btn btn-info" onclick="window.location.href='/admin/kelas/{{$kelas->id}}/edit'">Edit</a>
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete</button>
-                        <form> --}}
+                        </form>
                     </td>
                 </tr>
             @php
@@ -49,7 +49,7 @@
     </table>
     @php
         $i = 1;
-    @endphp     
+    @endphp
     <table class="table table-striped">
         <thead>
             <tr>

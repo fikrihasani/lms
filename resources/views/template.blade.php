@@ -7,6 +7,8 @@
         <title>@yield('title')</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.2/font/bootstrap-icons.css">
+        {{-- tempat untuk custom css --}}
+        @yield('css')
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -23,7 +25,7 @@
                 --}}
                   <li class="nav-item">
                     <a class="nav-link" href="/informasi">Informasi</a>
-                  </li> 
+                  </li>
                   {{-- <li class="nav-item">
                     <a class="nav-link" href="#">Pricing</a>
                   </li> --}}
@@ -95,7 +97,7 @@
             selectEl.add(option);
           });
         }
-        // clear selected 
+        // clear selected
         function clearOptionFromSelect(el){
           if (el.length > 0) {
             el.forEach(o => o.remove());
@@ -118,7 +120,7 @@
                       var el = document.getElementById('pageProbAns'+i);
                       el.classList.remove('active');
                   }
-                  // add active to clicked 
+                  // add active to clicked
                   var element = document.getElementById(pagingId);
                   element.classList.add("active");
                 }
@@ -139,9 +141,11 @@
                     var el = document.getElementById('pageResAns'+i);
                     el.classList.remove('active');
                 }
-                // add active to clicked 
+                // add active to clicked
                 var element = document.getElementById(pagingId);
                 element.classList.add("active");
         }
     </script>
+    {{-- tempak untuk custom js --}}
+    @yield('js')
 </html>

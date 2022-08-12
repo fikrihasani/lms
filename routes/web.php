@@ -36,7 +36,7 @@ Route::get('/answer',[AppController::class,'answer']);
 Route::get('/answer/result/{id}',[AppController::class,'result']);
 Route::post('/answerStore',[AppController::class,'answerStore']);
 
-Route::prefix('/admin')->group(function(){
+Route::prefix('/admin')->middleware('role:admin')->group(function(){
     Route::get('/',[AdminController::class,'index']);
     Route::get("/recap",[AdminController::class,'recapAns']);
     Route::resource('/question', QuestionController::class);
@@ -44,13 +44,13 @@ Route::prefix('/admin')->group(function(){
     Route::get('/export/{idKelas}/{isTeacher}', [AdminController::class, 'export']);
     Route::get('/school',[SchoolController::class,'index'])->name('admin.school.index');
     Route::post('/school/store',[SchoolController::class,'store'])->name('admin.school.store');
-    Route::get('/school/{id}',[SchoolController::class,'info']);
-    Route::get('/school/{id}/edit',[SchoolController::class,'edit']);
+    Route::get('/school/{id}',[SchoolController::class,'info'])->name('admin.school.info');
+    Route::get('/school/{id}/edit',[SchoolController::class,'edit'])->name('admin.school.edit');
     Route::post('/school/addKelas/{id}',[SchoolController::class,'addKelas']);
     Route::get('/kelas',[KelasController::class,'index']);
-    Route::get('/kelas/{id}',[KelasController::class,'info']);
+    Route::get('/kelas/{id}',[KelasController::class,'info'])->name('admin.kelas.info');
     Route::delete('/kelas/delete/{id}',[KelasController::class,'removeTeacher']);
-    Route::delete('/kelas/{id}',[KelasController::class,'destroy']);
+    Route::delete('/kelas/{kela}',[KelasController::class,'destroy'])->name('admin.kelas.delete');
     Route::post('/kelas/addTeacher',[KelasController::class,'addTeacher'])->name('admin.kelas.addTeacher');
     Route::get('/users',[UserController::class,'index']);
     Route::get('/users/{id}',[UserController::class,'show']);
