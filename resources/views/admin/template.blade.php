@@ -268,7 +268,7 @@
                 window.location.href='/admin/export/'+el.value+'/'+0;
             }else{
                 // alert(1);
-                window.location.href='/admin/export/'+el.value+'/'+1;
+                window.location.href='/guru/export/'+el.value+'/'+1;
 
             }
         }

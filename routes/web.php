@@ -66,7 +66,7 @@ Route::prefix('/guru')->middleware('role:guru')->group(function(){
     Route::get("/recap",[AdminController::class,'recapAns']);
     // Route::resource('/question', QuestionController::class);
     // Route::get('/question/probs/{questionType}',[QuestionController::class,'probs']);
-    // Route::get('/export/{idKelas}/{isTeacher}', [AdminController::class, 'export']);
+    Route::get('/export/{idKelas}/{isTeacher}', [AdminController::class, 'export']);
     // Route::get('/school',[SchoolController::class,'index'])->name('admin.school.index');
     // Route::post('/school/store',[SchoolController::class,'store'])->name('admin.school.store');
     // Route::get('/school/{id}',[SchoolController::class,'info'])->name('admin.school.info');
