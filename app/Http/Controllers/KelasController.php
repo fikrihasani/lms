@@ -43,7 +43,7 @@ class KelasController extends Controller
             array_push($ls,$d->id_guru);
         }
         $kelas = Kelas::find($id);
-        $teacher = DB::table('users')->select('users.name','users.id')->join('schools','schools.id','=','users.schools_id')->whereNotIn('users.id',$ls)->get();
+        $teacher = DB::table('users')->select('users.name','users.id')->join('schools','schools.id','=','users.schools_id')->where('kelas.id',$id)->whereNotIn('users.id',$ls)->get();
         // $teacher = User::where('role',0)->whereNotIn('id',$ls)->where()->get();
         $dataSiswa =  $this->groupByKelas($id);
         return view('admin.kelas.info',['kelas'=>$kelas,'data'=>$data,'dataSiswa'=>$dataSiswa,'teacher'=>$teacher]);
