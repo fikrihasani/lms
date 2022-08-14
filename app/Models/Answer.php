@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use phpDocumentor\Reflection\Types\Null_;
 
 class Answer extends Model
 {
@@ -201,6 +202,9 @@ class Answer extends Model
                 $model = $this->queryAnswerRecapCondition($idKelas);
             }
         }
+        if($model->isEmpty()){
+            return NULL;
+        }        
         $data = $this->convertAnswerData($model);
         $recaps = array();
         $check = $this->convertToRecap($ansSes[0]["id"],$data);

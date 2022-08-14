@@ -4,6 +4,13 @@
 @endsection
 @section('adminsection')
 <div class="container">
+    @if (is_null($answer))
+        <center>
+            <div class="alert alert-info" role="alert">
+                <strong>Belum ada Jawaban Siswa</strong>
+            </div>
+        </center>
+    @else
     <div style="padding: 10px 0px">
         <form action="" method="post">
             <div style="padding-bottom: 5px" class="row">
@@ -102,6 +109,8 @@
         @endif
     )">Download Excel</button>
     {{-- </a> --}}
+        
+    @endif
     
 </div>
 @endsection

@@ -29,7 +29,7 @@
                         <td>{{$u->nama_sekolah}}</td>
                         @if (Auth::user()->role == 1)
                         <td>
-                            <button type="button" class="btn btn-primary">View</button>
+                            <a href="{{route('admin.users.info',$u->id_guru)}}"><button type="button" class="btn btn-primary">View</button></a>
                         </td>
                         <td>
                             <form action="/admin/kelas/delete/{{$u->id_guru}}" method="POST">

@@ -34,7 +34,7 @@
                     <td>
                         <form action="{{route('admin.kelas.delete', $kelas->id)}}" method="POST">
                             <a class="btn btn-info" href="{{route('admin.kelas.info', $kelas->id)}}">Show</a>
-                            <a class="btn btn-info" onclick="window.location.href='/admin/kelas/{{$kelas->id}}/edit'">Edit</a>
+                            <a class="btn btn-info" onclick="window.location.href='{{route('admin.kelas.edit', $kelas->id)}}'">Edit</a>
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger">Delete</button>

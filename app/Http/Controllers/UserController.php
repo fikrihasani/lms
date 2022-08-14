@@ -21,8 +21,9 @@ class UserController extends Controller
     }
 
     public function show($id){
-        $data = DB::table('users')->select('users.*','schools.id as id_sekolah','kelas.name as nama_kelas','schools.name as nama_sekolah','kelas.id as id_kelas')->join('schools','schools.id','=','users.schools_id')->join('kelas','schools.id','=','kelas.schools_id')->where('users.id','=',$id)->where('users.role','=',0)->get();
+        $data = DB::table('teachings')->select('users.*','kelas.name as nama_kelas','kelas.id as id_kelas', 'schools.name as nama_sekolah')->join('users','users.id','=','teachings.users_id')->join('kelas','kelas.id','=','teachings.kelas_id')->join('schools','schools.id','=','users.schools_id')->where('teachings.users_id','=',$id)->get();
         $user = $data->first();
+        // return $data->name;
         return view('admin.users.info',['data'=>$data,'user'=>$user]);
     }
 
@@ -48,7 +49,6 @@ class UserController extends Controller
     }
 
     public function store(Request $request){
-        return dd($request);
         $request->validate([
             'name'=>'required|max:255',
             'email'=>'required|email:dns',
@@ -63,7 +63,7 @@ class UserController extends Controller
         $user->password = $request->password;
         $user->email = $request->email;
         $user->role = 0;
-        // $user->schools_id  = $request->school;
+        $user->schools_id  = $request->school;
         $user->save();
 
         return redirect('/admin/user/'.$user->id)->with('success','Pendaftaran akun berhasil. Silahkan login');

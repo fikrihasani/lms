@@ -21,14 +21,14 @@ class KelasController extends Controller
     }
 
     public function destroy(Kelas $kela){
-        // $deleted = Teaching::where('kelas_id',$id)->delete();
-        // $answer = Answer::where('kelas_id',$id)->groupBy('answer_sessions_id')->get();
-        // $ls = array();
-        // foreach ($answer as $ans) {
-        //     array_push($ls,$ans->answer_sessions_id);
-        // }
-        // $answer = Answer::whereIn('answer_sessions_id',$ls)->delete();
-        // $answerSession = AnswerSession::whereIn('id',$ls)->delete();
+        $deleted = Teaching::where('kelas_id',$kela->id)->delete();
+        $answer = Answer::where('kelas_id',$kela->id)->groupBy('answer_sessions_id')->get();
+        $ls = array();
+        foreach ($answer as $ans) {
+            array_push($ls,$ans->answer_sessions_id);
+        }
+        $answer = Answer::whereIn('answer_sessions_id',$ls)->delete();
+        $answerSession = AnswerSession::whereIn('id',$ls)->delete();
         // return $id;
         //Cuma delete kelas kalau mau ditambah cek bisa di atas
         $kela->delete();
@@ -43,7 +43,7 @@ class KelasController extends Controller
             array_push($ls,$d->id_guru);
         }
         $kelas = Kelas::find($id);
-        $teacher = DB::table('users')->select('*')->join('schools','schools.id','=','users.schools_id')->join('kelas','kelas.schools_id','=','schools.id')->where('users.role',0)->whereNotIn('users.id',$ls)->get();
+        $teacher = DB::table('users')->select('users.name','users.id')->join('schools','schools.id','=','users.schools_id')->whereNotIn('users.id',$ls)->get();
         // $teacher = User::where('role',0)->whereNotIn('id',$ls)->where()->get();
         $dataSiswa =  $this->groupByKelas($id);
         return view('admin.kelas.info',['kelas'=>$kelas,'data'=>$data,'dataSiswa'=>$dataSiswa,'teacher'=>$teacher]);

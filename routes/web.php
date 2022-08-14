@@ -49,16 +49,43 @@ Route::prefix('/admin')->middleware('role:admin')->group(function(){
     Route::post('/school/addKelas/{id}',[SchoolController::class,'addKelas']);
     Route::get('/kelas',[KelasController::class,'index']);
     Route::get('/kelas/{id}',[KelasController::class,'info'])->name('admin.kelas.info');
+    Route::get('/kelas/{id}/edit',[KelasController::class,'edit'])->name('admin.kelas.edit');
     Route::delete('/kelas/delete/{id}',[KelasController::class,'removeTeacher']);
     Route::delete('/kelas/{kela}',[KelasController::class,'destroy'])->name('admin.kelas.delete');
     Route::post('/kelas/addTeacher',[KelasController::class,'addTeacher'])->name('admin.kelas.addTeacher');
     Route::get('/users',[UserController::class,'index']);
-    Route::get('/users/{id}',[UserController::class,'show']);
+    Route::get('/users/{id}',[UserController::class,'show'])->name('admin.users.info');
     Route::get('/users/add/{idSekolah}',[UserController::class,'add']);
     Route::get('/users/{id}/edit',[UserController::class,'edit']);
     Route::put('/users/{id}',[UserController::class,'update'])->name('admin.user.update');
     Route::post('/users/store',[UserController::class,'store'])->name('admin.user.store');
 });
+
+Route::prefix('/guru')->middleware('role:guru')->group(function(){
+    Route::get('/',[AdminController::class,'index']);
+    Route::get("/recap",[AdminController::class,'recapAns']);
+    // Route::resource('/question', QuestionController::class);
+    // Route::get('/question/probs/{questionType}',[QuestionController::class,'probs']);
+    // Route::get('/export/{idKelas}/{isTeacher}', [AdminController::class, 'export']);
+    // Route::get('/school',[SchoolController::class,'index'])->name('admin.school.index');
+    // Route::post('/school/store',[SchoolController::class,'store'])->name('admin.school.store');
+    // Route::get('/school/{id}',[SchoolController::class,'info'])->name('admin.school.info');
+    // Route::get('/school/{id}/edit',[SchoolController::class,'edit'])->name('admin.school.edit');
+    // Route::post('/school/addKelas/{id}',[SchoolController::class,'addKelas']);
+    // Route::get('/kelas',[KelasController::class,'index']);
+    // Route::get('/kelas/{id}',[KelasController::class,'info'])->name('admin.kelas.info');
+    // Route::delete('/kelas/delete/{id}',[KelasController::class,'removeTeacher']);
+    // Route::delete('/kelas/{kela}',[KelasController::class,'destroy'])->name('admin.kelas.delete');
+    // Route::post('/kelas/addTeacher',[KelasController::class,'addTeacher'])->name('admin.kelas.addTeacher');
+    // Route::get('/users',[UserController::class,'index']);
+    // Route::get('/users/{id}',[UserController::class,'show']);
+    // Route::get('/users/add/{idSekolah}',[UserController::class,'add']);
+    // Route::get('/users/{id}/edit',[UserController::class,'edit']);
+    // Route::put('/users/{id}',[UserController::class,'update'])->name('admin.user.update');
+    // Route::post('/users/store',[UserController::class,'store'])->name('admin.user.store');
+});
+
+
 Route::post('/ckeditor/upload',[CkeditorController::class,'upload'])->name('ckeditor.image-upload');
 Route::get('/login',[AuthController::class,'login'])->name('login');
 Route::get('/register',[RegisterController::class,'register'])->name('register');
