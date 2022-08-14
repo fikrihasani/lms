@@ -17,7 +17,7 @@
             </tr>
             <tr>
                 <td>Sekolah: </td>
-                <td>{{$user->nama_sekolah}}</td>
+                <td>{{$user->schools->name}}</td>
             </tr>
         </table>
     </div>

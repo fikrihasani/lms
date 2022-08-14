@@ -22,8 +22,7 @@ class UserController extends Controller
 
     public function show($id){
         $data = DB::table('teachings')->select('users.*','kelas.name as nama_kelas','kelas.id as id_kelas', 'schools.name as nama_sekolah')->join('users','users.id','=','teachings.users_id')->join('kelas','kelas.id','=','teachings.kelas_id')->join('schools','schools.id','=','users.schools_id')->where('teachings.users_id','=',$id)->get();
-        $user = $data->first();
-        // return $data->name;
+        $user = User::find($id);
         return view('admin.users.info',['data'=>$data,'user'=>$user]);
     }
 
@@ -66,7 +65,7 @@ class UserController extends Controller
         $user->schools_id  = $request->school;
         $user->save();
 
-        return redirect('/admin/user/'.$user->id)->with('success','Pendaftaran akun berhasil. Silahkan login');
+        return redirect('/admin/users/'.$user->id)->with('success','Pendaftaran akun berhasil. Silahkan login');
     }
 
     public function update(Request $request, $id){
@@ -94,7 +93,7 @@ class UserController extends Controller
         }
         // return dd($request);
         $user->save();
-        return redirect('/admin/user/'.$user->id);
+        return redirect('/admin/users/'.$user->id);
 
     }
 
