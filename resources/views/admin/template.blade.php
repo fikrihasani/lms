@@ -55,7 +55,13 @@
                     </li>
                     @endif
                     <li class="nav-item">
-                        <a class="nav-link" href="/admin/recap">Rekap Data Evaluasi</a>
+                        <a class="nav-link" href=
+                        @if(Auth::user()->role==1)
+                        {{"/admin/recap"}}
+                        @else
+                        {{"/guru/recap"}}
+                        @endif
+                        >Rekap Data Evaluasi</a>
                     </li>
                 </ul>
                 <span class="navbar-text">
